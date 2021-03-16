@@ -1,0 +1,75 @@
+package com.senne.cifragospel2021.view
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.senne.cifragospel2021.R
+
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        appBarConfiguration = AppBarConfiguration(setOf(
+                R.id.nav_search, R.id.nav_all, R.id.nav_myList), drawerLayout)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+
+        val db = FirebaseFirestore.getInstance()
+
+
+
+
+
+    }
+
+    private fun generateSearchKeyWords(inputText: String, inputText2: String): List<String> {
+
+        var keyWords = mutableListOf<String>()
+        generateSimple(inputText, keyWords)
+        generateSimple(inputText2, keyWords)
+
+        return keyWords
+    }
+
+
+    private fun generateSimple(txt: String, keywords: MutableList<String>) {
+
+        var inputString = txt.toLowerCase()
+        val words = inputString.split(" ")
+        for(word in words) {
+            var appendString = ""
+            for(charPosition in inputString.indices) {
+                appendString += inputString[charPosition].toString()
+                keywords.add(appendString)
+            }
+            inputString = inputString.replace("$word ", "")
+        }
+}
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="6dp"
+    tools:context=".view.CifraActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/cifra_foto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#eee"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cifra_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="Titulo"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toRightOf="@id/cifra_foto"
+            app:layout_constraintTop_toTopOf="@id/cifra_foto" />
+
+        <TextView
+            android:id="@+id/cifra_banda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="Banda"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toRightOf="@id/cifra_foto"
+            app:layout_constraintTop_toBottomOf="@id/cifra_titulo" />
+
+        <TextView
+            android:id="@+id/text_tom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginVertical="16dp"
+            app:layout_constraintTop_toBottomOf="@id/cifra_banda"
+            android:text="Tom: " />
+
+        <Spinner
+            android:id="@+id/cifra_tom"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textAlignment="center"
+            app:layout_constraintLeft_toRightOf="@id/text_tom"
+            android:layout_marginVertical="12dp"
+            app:layout_constraintTop_toBottomOf="@id/cifra_banda" />
+
+        <TextView
+            android:id="@+id/cifra_cifra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cifra huahsudhsjudhsaudss
+
+    sda jhjhj h jh jk      jh jk hj k hkj h j       kj h jkh kj j
+    dsa
+    ds
+    ad
+    s
+
+
+    dsadsadsdsdsds
+    dsdsadsadsadsadsadad
+    dsadsa
+
+    dsdsadssd d   dsadsasasdsadsa sadsadsads  dsadsadsa dassa "
+            android:textSize="16sp"
+            android:layout_marginVertical="16dp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cifra_tom" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -1,15 +1,24 @@
 package com.senne.cifragospel2021.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.senne.cifragospel2021.R
-import com.senne.cifragospel2021.viewModel.AllViewModel
 import com.senne.cifragospel2021.viewModel.CifraViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cifra.*
@@ -67,12 +76,31 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
         })
 
         mCifraViewModel.novoTom.observe(this, Observer {
-            cifra_cifra.text = it
+            val startIndex = it.indexOf("<b>")  // e.g. only
+            val endIndex = it.indexOf("</b>")  // e.g. only
+            var cifraNoB = it.replace("<b>", "").replace("</b>", "")
+
+            val flag = 0  // 0: no flag
+
+            val color = resources.getColor(R.color.red)
+            val spans = ForegroundColorSpan(color)
+
+            val spannableString = SpannableString(cifraNoB)
+
+            spannableString.setSpan(spans, startIndex, endIndex, flag)
+
+            cifra_cifra.text = spannableString
+
+
+
+
         })
 
         mCifraViewModel.foto.observe(this, Observer {
             Picasso.get().load(it).into(cifra_foto)
         })
+
+
 
     }
 

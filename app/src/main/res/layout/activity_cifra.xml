@@ -15,7 +15,6 @@
             android:id="@+id/cifra_foto"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="#eee"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:text="Titulo"
             android:textSize="24sp"
             app:layout_constraintLeft_toRightOf="@id/cifra_foto"
             app:layout_constraintTop_toTopOf="@id/cifra_foto" />
@@ -34,7 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:text="Banda"
             android:textSize="18sp"
             app:layout_constraintLeft_toRightOf="@id/cifra_foto"
             app:layout_constraintTop_toBottomOf="@id/cifra_titulo" />
@@ -62,21 +59,9 @@
             android:id="@+id/cifra_cifra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cifra huahsudhsjudhsaudss
-
-    sda jhjhj h jh jk      jh jk hj k hkj h j       kj h jkh kj j
-    dsa
-    ds
-    ad
-    s
-
-
-    dsadsadsdsdsds
-    dsdsadsadsadsadsadad
-    dsadsa
-
-    dsdsadssd d   dsadsasasdsadsa sadsadsads  dsadsadsa dassa "
             android:textSize="16sp"
+            android:text="#
+            Cifra não disponível"
             android:layout_marginVertical="16dp"
 
             app:layout_constraintLeft_toLeftOf="parent"

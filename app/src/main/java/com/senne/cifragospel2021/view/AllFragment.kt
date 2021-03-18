@@ -45,7 +45,12 @@ class AllFragment : Fragment() {
                 bundle.putString("titulo", titulo)
                 bundle.putString("banda", banda)
                 bundle.putString("tom", tom)
-                bundle.putString("cifra", cifra)
+                if(cifra != "" || cifra != null) {
+                    bundle.putString("cifra", cifra)
+                }else {
+                    bundle.putString("cifra", "Cifra não disponível")
+                }
+
                 bundle.putString("youtube", youtube)
 
                 intent.putExtras(bundle)

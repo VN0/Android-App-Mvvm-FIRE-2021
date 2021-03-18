@@ -22,7 +22,7 @@ class CifraViewModel : ViewModel() {
      var tomInicio : String = ""
 
     private var mCifra = MutableLiveData<String>()
-    val cifra : LiveData<String> = mCifra
+    var cifra : LiveData<String> = mCifra
 
     private var mFoto = MutableLiveData<String>()
     val foto : LiveData<String> = mFoto
@@ -33,6 +33,7 @@ class CifraViewModel : ViewModel() {
         mBanda.value = banda
         mFoto.value = foto
         tomInicio = tom
+
 
         when (tom) {
             // Maiores
@@ -95,6 +96,7 @@ class CifraViewModel : ViewModel() {
     val mSiCifra = SiCifra()
 
     fun mudaTom(tomSpin: String) {
+
         var cifraTratada: String = mCifra.value.toString()
         if( tomInicio == "C" || tomInicio == "Am") {
                  if (tomSpin == "C" || tomSpin == "Am") { mNovoTom.value = mCifra.value }

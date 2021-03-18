@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Html
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
@@ -23,7 +24,8 @@ import com.senne.cifragospel2021.viewModel.CifraViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cifra.*
 
-class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
+class CifraActivity : AppCompatActivity(), View.OnClickListener,
+    AdapterView.OnItemSelectedListener {
 
     private lateinit var mCifraViewModel: CifraViewModel
 
@@ -34,13 +36,13 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
         mCifraViewModel = ViewModelProvider(this).get(CifraViewModel::class.java)
 
         val bundle = intent.extras
-        if(bundle != null) {
+        if (bundle != null) {
             val titulo = bundle.getString("titulo")
             val banda = bundle.getString("banda")
             val tom = bundle.getString("tom")
             val cifra = bundle.getString("cifra")
             val foto = bundle.getString("foto")
-            mCifraViewModel.load("$titulo","$banda","$tom","$cifra","$foto")
+            mCifraViewModel.load("$titulo", "$banda", "$tom", "$cifra", "$foto")
         }
 
         mCifraViewModel.titulo.observe(this, Observer {
@@ -55,68 +57,88 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
 
         cifra_tom.onItemSelectedListener = this
 
-        val mListMaior = listOf("C","C#","D","D#","E","F","F#","G","G#","A","A#","B","Bb","Ab","Gb","Eb","Db")
-        val mListMenor = listOf("Cm","C#m","Dm","D#m","Em","Fm","F#m","Gm","G#m","Am","A#m","Bm","Bbm","Abm","Gbm","Ebm","Dbm")
+        val mListMaior = listOf("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "Bb", "Ab", "Gb", "Eb", "Db" )
+        val mListMenor = listOf("Cm","C#m","Dm", "D#m", "Em", "Fm", "F#m", "Gm","G#m", "Am", "A#m", "Bm", "Bbm", "Abm", "Gbm", "Ebm", "Dbm" )
 
         mCifraViewModel.tom.observe(this, Observer {
 
-            if((it == 0) || (it == 1) || (it == 2) || (it == 3) || (it == 4) || (it == 5) || (it == 6) || (it == 7) || (it == 8) || (it == 9) || (it == 10) || (it == 11) || (it == 12) || (it == 13) || (it == 14) || (it == 15) || (it == 16) ){
-                cifra_tom.adapter =  ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMaior)
+            if ((it == 0) || (it == 1) || (it == 2) || (it == 3) || (it == 4) || (it == 5) || (it == 6) || (it == 7) || (it == 8) || (it == 9) || (it == 10) || (it == 11) || (it == 12) || (it == 13) || (it == 14) || (it == 15) || (it == 16)) {
+                cifra_tom.adapter =
+                    ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMaior)
                 cifra_tom.setSelection(it)
-            }else {
+            } else {
                 val pos = it - 17
-                cifra_tom.adapter =  ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMenor)
+                cifra_tom.adapter =
+                    ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMenor)
                 cifra_tom.setSelection(pos)
             }
 
         })
 
-        mCifraViewModel.cifra.observe(this, Observer {
-            cifra_cifra.text = it
-        })
 
         mCifraViewModel.novoTom.observe(this, Observer {
-            val startIndex = it.indexOf("<b>")  // e.g. only
-            val endIndex = it.indexOf("</b>")  // e.g. only
-            var cifraNoB = it.replace("<b>", "").replace("</b>", "")
 
-            val flag = 0  // 0: no flag
+            val itEdited = it.toString().replace("<b>", "&").replace("</b>", "*")
 
-            val color = resources.getColor(R.color.red)
-            val spans = ForegroundColorSpan(color)
-
-            val spannableString = SpannableString(cifraNoB)
-
-            spannableString.setSpan(spans, startIndex, endIndex, flag)
-
-            cifra_cifra.text = spannableString
-
-
-
+            cifra_cifra.text = setCifra(itEdited)
 
         })
+
 
         mCifraViewModel.foto.observe(this, Observer {
             Picasso.get().load(it).into(cifra_foto)
         })
 
 
-
     }
 
-    override fun onClick(v: View) {  }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) { Toast.makeText(this,"Tom da música não disponível", Toast.LENGTH_LONG).show() }
+    fun setCifra(text: String): SpannableStringBuilder {
+        val span = SpannableStringBuilder(text)
+
+            var offset = 0
+            var offset2 = 0
+            var start: Int
+            var end: Int
+
+            start = text.indexOf("&", offset, true)
+            end = text.indexOf("*", offset2, true)
+
+
+            while (start >= 0) {
+
+               span.setSpan(StyleSpan(Typeface.BOLD), start + 1 , end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+               span.setSpan( ForegroundColorSpan(resources.getColor(R.color.red)),  start + 1 , end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                span.setSpan( ForegroundColorSpan(resources.getColor(R.color.white)),  start  , start + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                span.setSpan( ForegroundColorSpan(resources.getColor(R.color.white)),  end  , end + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+                offset2 = end + 1
+                offset = start + 1
+                start = text.indexOf("&", offset, true)
+                end = text.indexOf("*", offset2, true)
+            }
+
+        return span
+    }
+
+
+    override fun onClick(v: View) {}
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        Toast.makeText(this, "Tom da música não disponível", Toast.LENGTH_LONG).show()
+    }
 
     override fun onItemSelected(parent: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
         when (parent?.id) {
             R.id.cifra_tom -> {
-              val nota = parent?.getItemAtPosition(position)
+                val nota = parent?.getItemAtPosition(position)
                 mCifraViewModel.mudaTom("$nota")
             }
+        }
+
+
+
+
     }
-
-
-}
 
 }

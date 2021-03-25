@@ -1,22 +1,15 @@
 package com.senne.cifragospel2021.view
 
 import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.util.TypedValue
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.senne.cifragospel2021.R
@@ -24,14 +17,22 @@ import com.senne.cifragospel2021.viewModel.CifraViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cifra.*
 
-class CifraActivity : AppCompatActivity(), View.OnClickListener,
-    AdapterView.OnItemSelectedListener {
+class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private lateinit var mCifraViewModel: CifraViewModel
+    private var ourFontSize = 16f
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cifra)
+
+        if(supportActionBar != null) {
+            supportActionBar!!.hide()
+        }
+
+        cifra_less.setOnClickListener(this)
+        cifra_more.setOnClickListener(this)
 
         mCifraViewModel = ViewModelProvider(this).get(CifraViewModel::class.java)
 
@@ -62,15 +63,19 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener,
 
         mCifraViewModel.tom.observe(this, Observer {
 
-            if ((it == 0) || (it == 1) || (it == 2) || (it == 3) || (it == 4) || (it == 5) || (it == 6) || (it == 7) || (it == 8) || (it == 9) || (it == 10) || (it == 11) || (it == 12) || (it == 13) || (it == 14) || (it == 15) || (it == 16)) {
-                cifra_tom.adapter =
-                    ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMaior)
-                cifra_tom.setSelection(it)
-            } else {
-                val pos = it - 17
-                cifra_tom.adapter =
-                    ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMenor)
-                cifra_tom.setSelection(pos)
+            for(i in 0..16) {
+                if (it == i) {
+                    cifra_tom.adapter =
+                        ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMaior)
+                    cifra_tom.setSelection(it)
+                    break
+                } else {
+                    val pos = it - 17
+                    cifra_tom.adapter =
+                        ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMenor)
+                    cifra_tom.setSelection(pos)
+                }
+
             }
 
         })
@@ -78,12 +83,11 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener,
 
         mCifraViewModel.novoTom.observe(this, Observer {
 
-            val itEdited = it.toString().replace("<b>", "&").replace("</b>", "*")
+            val itEdited = it.toString().replace("<b>", "&.").replace("</b>", "*.")
 
             cifra_cifra.text = setCifra(itEdited)
 
         })
-
 
         mCifraViewModel.foto.observe(this, Observer {
             Picasso.get().load(it).into(cifra_foto)
@@ -91,7 +95,6 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener,
 
 
     }
-
 
     fun setCifra(text: String): SpannableStringBuilder {
         val span = SpannableStringBuilder(text)
@@ -101,28 +104,41 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener,
             var start: Int
             var end: Int
 
-            start = text.indexOf("&", offset, true)
-            end = text.indexOf("*", offset2, true)
+            start = text.indexOf("&.", offset, true)
+            end = text.indexOf("*.", offset2, true)
 
 
             while (start >= 0) {
 
-               span.setSpan(StyleSpan(Typeface.BOLD), start + 1 , end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-               span.setSpan( ForegroundColorSpan(resources.getColor(R.color.red)),  start + 1 , end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                span.setSpan( ForegroundColorSpan(resources.getColor(R.color.white)),  start  , start + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                span.setSpan( ForegroundColorSpan(resources.getColor(R.color.white)),  end  , end + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+               span.setSpan(StyleSpan(Typeface.BOLD), start + 2 , end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+               span.setSpan( ForegroundColorSpan(resources.getColor(R.color.red)),  start + 2 , end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+               span.setSpan( ForegroundColorSpan(resources.getColor(R.color.white)),  start  , start + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+               span.setSpan( ForegroundColorSpan(resources.getColor(R.color.white)),  end  , end + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-                offset2 = end + 1
-                offset = start + 1
-                start = text.indexOf("&", offset, true)
-                end = text.indexOf("*", offset2, true)
+
+                offset2 = end + 2
+                offset = start + 2
+                start = text.indexOf("&.", offset, true)
+                end = text.indexOf("*.", offset2, true)
             }
 
         return span
     }
 
 
-    override fun onClick(v: View) {}
+    override fun onClick(v: View) {
+        val id = v.id
+        when(id) {
+            R.id.cifra_less -> {
+                ourFontSize -= 1f
+                cifra_cifra.setTextSize(TypedValue.COMPLEX_UNIT_SP, ourFontSize)
+            }
+            R.id.cifra_more -> {
+                ourFontSize += 1f
+                cifra_cifra.setTextSize(TypedValue.COMPLEX_UNIT_SP, ourFontSize)
+            }
+        }
+    }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
         Toast.makeText(this, "Tom da música não disponível", Toast.LENGTH_LONG).show()
@@ -135,8 +151,6 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener,
                 mCifraViewModel.mudaTom("$nota")
             }
         }
-
-
 
 
     }

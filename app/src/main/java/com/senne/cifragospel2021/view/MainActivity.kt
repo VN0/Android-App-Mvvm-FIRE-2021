@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.nav_search, R.id.nav_all, R.id.nav_myList), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -39,33 +37,34 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-    }
-
-    private fun generateSearchKeyWords(inputText: String, inputText2: String): List<String> {
-
-        var keyWords = mutableListOf<String>()
-        generateSimple(inputText, keyWords)
-        generateSimple(inputText2, keyWords)
-
-        return keyWords
     }
 
 
     private fun generateSimple(txt: String, keywords: MutableList<String>) {
 
-        var inputString = txt.toLowerCase()
+        var inputString = txt
         val words = inputString.split(" ")
         for(word in words) {
             var appendString = ""
             for(charPosition in inputString.indices) {
-                appendString += inputString[charPosition].toString()
-                keywords.add(appendString)
+                appendString += inputString[charPosition].toString().replace("á","a").replace("ã","a")
+                    .replace("â","a").replace("é","e").replace("ê","e")
+                    .replace("í","i").replace("ó","o").replace("ô","o").replace("ú","u")
+                if(appendString.length > 3) {
+                    keywords.add(appendString.toLowerCase())
+                }
+
             }
             inputString = inputString.replace("$word ", "")
         }
-}
+    }
+    private fun generateSearchKeyWords(inputText: String): List<String> {
+
+        var keyWords = mutableListOf<String>()
+        generateSimple(inputText, keyWords)
+
+        return keyWords
+    }
 
 
     override fun onSupportNavigateUp(): Boolean {

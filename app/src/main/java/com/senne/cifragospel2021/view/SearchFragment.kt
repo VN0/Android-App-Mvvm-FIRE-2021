@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ import com.senne.cifragospel2021.viewModel.SearchViewModel
 import kotlinx.android.synthetic.main.all.*
 import kotlinx.android.synthetic.main.search.*
 import kotlinx.android.synthetic.main.search.view.*
+import kotlinx.coroutines.*
 
 class SearchFragment : Fragment() {
 
@@ -44,23 +46,30 @@ class SearchFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = mAdapter
 
-        val editText: EditText = root.findViewById(R.id.edit_text)
-        editText.addTextChangedListener( object: TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {   }
+    val editText: EditText = root.findViewById(R.id.edit_text)
+    editText.addTextChangedListener( object: TextWatcher {
+        override fun afterTextChanged(p0: Editable?) { }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {  }
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {  }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                var searchText : String = editText.text.toString()
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                mSearchViewModel.load(searchText.toLowerCase()).observe(viewLifecycleOwner, Observer {
-                    mAdapter.searchList = it
-                    mAdapter.notifyDataSetChanged()
-                })
+                if("$s".length > 3) {
+                    recycler_search.visibility = View.VISIBLE
+                    search_results.visibility = View.GONE
+                    mSearchViewModel.load("$s".toLowerCase()).observe(viewLifecycleOwner, Observer {
+                        mAdapter.searchList = it
+                        mAdapter.notifyDataSetChanged()
+                        Log.d("DELAY", "$s")
+                    })
+                }else {
+                    search_results.visibility = View.VISIBLE
+                    recycler_search.visibility = View.GONE
+                }
 
-            }
+        }
 
-        })
+    })
 
 
         mListener = object : MusicListener {

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
-import com.senne.cifragospel2021.model.CifraModel
+import com.senne.cifragospel2021.model.SearchModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -14,28 +14,26 @@ class SearchViewModel : ViewModel() {
     private var searchJob: Job? = null
 
 
-    fun load(searchText: String): LiveData<MutableList<CifraModel>> {
-        val mutableData = MutableLiveData<MutableList<CifraModel>>()
+    fun load(searchText: String): LiveData<MutableList<SearchModel>> {
+        val mutableData = MutableLiveData<MutableList<SearchModel>>()
 
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
             delay(500)
 
 
-            FirebaseFirestore.getInstance().collection("Cifras")
+            FirebaseFirestore.getInstance().collection("Search")
                 .whereArrayContains("key_words", searchText).get()
                 .addOnSuccessListener { result ->
 
-                    val list = mutableListOf<CifraModel>()
+                    val list = mutableListOf<SearchModel>()
                     for (document in result) {
 
-                        val cifra = document.toObject(CifraModel::class.java)
+                        val cifra = document.toObject(SearchModel::class.java)
                         list.add(
-                            CifraModel(
+                            SearchModel(
                                 "${cifra.titulo}",
                                 "${cifra.banda}",
-                                "${cifra.tom}",
-                                "${cifra.cifra}",
                                 "${cifra.foto}"
                             )
                         )

@@ -6,16 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.senne.cifragospel2021.R
 import com.senne.cifragospel2021.listener.MusicListener
+import com.senne.cifragospel2021.model.AllModel
 import com.senne.cifragospel2021.view.AllFragment
-import com.senne.cifragospel2021.model.CifraModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.all_item_row.view.*
 
 class AllAdapter(private val context: AllFragment) : RecyclerView.Adapter<AllAdapter.MainViewHolder>() {
 
-    private var dataList = mutableListOf<CifraModel>()
+    private var dataList = mutableListOf<AllModel>()
     private lateinit var mListener: MusicListener
 
-    fun setListData(data: MutableList<CifraModel>) {
+    fun setListData(data: MutableList<AllModel>) {
         dataList = data
     }
 
@@ -38,12 +39,12 @@ class AllAdapter(private val context: AllFragment) : RecyclerView.Adapter<AllAda
     }
 
     inner class MainViewHolder(itemView: View, private val listener: MusicListener): RecyclerView.ViewHolder(itemView) {
-        fun bindView(cifra: CifraModel) {
-            itemView.title.text = cifra.titulo
-            itemView.banda.text = cifra.banda
+        fun bindView(cifra: AllModel) {
+            itemView.all_banda.text = cifra.banda
+            Picasso.get().load(cifra.foto).into(itemView.all_photo)
 
-            itemView.title.setOnClickListener {
-                listener.onClick(cifra.titulo, cifra.banda, cifra.tom, cifra.cifra, cifra.foto)
+            itemView.all_banda.setOnClickListener {
+                listener.onClickAll(cifra.banda)
             }
 
         }

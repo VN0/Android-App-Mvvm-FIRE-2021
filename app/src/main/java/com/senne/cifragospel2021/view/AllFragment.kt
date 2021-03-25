@@ -37,26 +37,22 @@ class AllFragment : Fragment() {
        recycler.adapter = mAdapter
 
         mListener = object : MusicListener {
-            override fun onClick(titulo: String,banda: String, tom: String, cifra: String, youtube: String) {
+            override fun onClick(titulo: String, banda: String, foto: String) { }
+            override fun onClickMusics(banda: String, titulo: String) {}
 
-                val intent = Intent(context,CifraActivity::class.java)
+            override fun onClickAll(banda: String) {
+
+                val intent = Intent(context,MusicsAcitivity::class.java)
 
                 val bundle = Bundle()
-                bundle.putString("titulo", titulo)
                 bundle.putString("banda", banda)
-                bundle.putString("tom", tom)
-                if(cifra != "" || cifra != null) {
-                    bundle.putString("cifra", cifra)
-                }else {
-                    bundle.putString("cifra", "Cifra não disponível")
-                }
-
-                bundle.putString("youtube", youtube)
 
                 intent.putExtras(bundle)
 
                 startActivity(intent)
             }
+
+
         }
 
         mAdapter.attachListener(mListener)

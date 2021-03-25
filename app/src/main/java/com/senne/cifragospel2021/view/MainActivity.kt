@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
     }
 
 
@@ -58,10 +60,11 @@ class MainActivity : AppCompatActivity() {
             inputString = inputString.replace("$word ", "")
         }
     }
-    private fun generateSearchKeyWords(inputText: String): List<String> {
+    private fun generateSearchKeyWords(inputText: String,inputText2: String): List<String> {
 
         var keyWords = mutableListOf<String>()
         generateSimple(inputText, keyWords)
+        generateSimple(inputText2, keyWords)
 
         return keyWords
     }

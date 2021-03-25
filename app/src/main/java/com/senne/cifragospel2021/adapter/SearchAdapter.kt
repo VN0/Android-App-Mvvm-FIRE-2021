@@ -6,24 +6,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.senne.cifragospel2021.R
 import com.senne.cifragospel2021.listener.MusicListener
-import com.senne.cifragospel2021.model.CifraModel
+import com.senne.cifragospel2021.model.SearchModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_cifra.*
-import kotlinx.android.synthetic.main.all_item_row.view.*
 import kotlinx.android.synthetic.main.search_item_row.view.*
 
-class SearchAdapter(var searchList: List<CifraModel>) : RecyclerView.Adapter<SearchAdapter.SearchListViewHolder>() {
+class SearchAdapter(var searchList: List<SearchModel>) : RecyclerView.Adapter<SearchAdapter.SearchListViewHolder>() {
 
     private lateinit var mListener: MusicListener
 
     inner class SearchListViewHolder(itemView: View, private val listener: MusicListener): RecyclerView.ViewHolder(itemView) {
-        fun bind(searchModel: CifraModel) {
+        fun bind(searchModel: SearchModel) {
             itemView.search_titlle.text = searchModel.titulo
             itemView.search_band.text = searchModel.banda
             Picasso.get().load(searchModel.foto).into(itemView.search_foto)
 
             itemView.search_titlle.setOnClickListener {
-                listener.onClick(searchModel.titulo, searchModel.banda, searchModel.tom, searchModel.cifra, searchModel.foto)
+                listener.onClick(searchModel.titulo, searchModel.banda,  searchModel.foto)
             }
         }
 

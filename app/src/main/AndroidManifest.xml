@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CifraGospel2021">
-        <activity android:name=".view.CifraActivity"></activity>
+        <activity
+            android:name=".view.MusicsAcitivity"
+            android:label="@string/title_activity_musics_acitivity"
+            android:theme="@style/Theme.CifraGospel2021.NoActionBar"></activity>
+        <activity android:name=".view.CifraActivity" />
         <activity android:name=".view.MusicActivity" />
         <activity
             android:name=".view.MainActivity"

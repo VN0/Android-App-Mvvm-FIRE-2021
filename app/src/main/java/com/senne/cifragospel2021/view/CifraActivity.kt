@@ -16,12 +16,12 @@ import com.senne.cifragospel2021.R
 import com.senne.cifragospel2021.viewModel.CifraViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cifra.*
+import kotlinx.android.synthetic.main.all.*
 
 class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private lateinit var mCifraViewModel: CifraViewModel
     private var ourFontSize = 16f
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +40,7 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
         if (bundle != null) {
             val titulo = bundle.getString("titulo")
             val banda = bundle.getString("banda")
-            val tom = bundle.getString("tom")
-            val cifra = bundle.getString("cifra")
-            val foto = bundle.getString("foto")
-            mCifraViewModel.load("$titulo", "$banda", "$tom", "$cifra", "$foto")
+            mCifraViewModel.load("$titulo", "$banda")
         }
 
         mCifraViewModel.titulo.observe(this, Observer {
@@ -65,14 +62,12 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
 
             for(i in 0..16) {
                 if (it == i) {
-                    cifra_tom.adapter =
-                        ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMaior)
+                    cifra_tom.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMaior)
                     cifra_tom.setSelection(it)
                     break
                 } else {
                     val pos = it - 17
-                    cifra_tom.adapter =
-                        ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMenor)
+                    cifra_tom.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMenor)
                     cifra_tom.setSelection(pos)
                 }
 
@@ -86,6 +81,7 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
             val itEdited = it.toString().replace("<b>", "&.").replace("</b>", "*.")
 
             cifra_cifra.text = setCifra(itEdited)
+            cifra_progress.visibility = View.GONE
 
         })
 
@@ -140,9 +136,7 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
         }
     }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        Toast.makeText(this, "Tom da música não disponível", Toast.LENGTH_LONG).show()
-    }
+    override fun onNothingSelected(p0: AdapterView<*>?) { Toast.makeText(this, "Tom da música não disponível", Toast.LENGTH_LONG).show()}
 
     override fun onItemSelected(parent: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
         when (parent?.id) {

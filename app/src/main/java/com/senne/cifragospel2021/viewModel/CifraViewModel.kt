@@ -3,7 +3,9 @@ package com.senne.cifragospel2021.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 import com.senne.cifragospel2021.cifras.*
+import com.senne.cifragospel2021.model.CifraModel
 
 class CifraViewModel : ViewModel() {
 
@@ -27,58 +29,68 @@ class CifraViewModel : ViewModel() {
     private var mFoto = MutableLiveData<String>()
     val foto : LiveData<String> = mFoto
 
-    fun load(titulo: String, banda: String, tom: String, cifra: String, foto: String) {
+    fun load(titulo: String, banda: String) {
 
         mTitulo.value = titulo
         mBanda.value = banda
-        mFoto.value = foto
-        tomInicio = tom
 
 
-        when (tom) {
-            // Maiores
-            "C" -> { mTom.value = 0}
-            "C#" -> { mTom.value = 1}
-            "D" -> { mTom.value = 2}
-            "D#" -> { mTom.value = 3}
-            "E" -> { mTom.value = 4}
-            "F" -> { mTom.value = 5}
-            "F#" -> { mTom.value = 6}
-            "G" -> { mTom.value = 7}
-            "G#" -> { mTom.value = 8}
-            "A" -> { mTom.value = 9}
-            "A#" -> { mTom.value = 10}
-            "B" -> { mTom.value = 11}
-            "Bb" -> { mTom.value = 12}
-            "Ab" -> { mTom.value = 13}
-            "Gb" -> { mTom.value = 14}
-            "Eb" -> { mTom.value = 15}
-            "Db" -> { mTom.value = 16}
-            // Menores
-            "Cm" -> { mTom.value = 17}
-            "C#m" -> { mTom.value = 18}
-            "Dm" -> { mTom.value = 19}
-            "D#m" -> { mTom.value = 20}
-            "Em" -> { mTom.value = 21}
-            "Fm" -> { mTom.value = 22}
-            "F#m" -> { mTom.value = 23}
-            "Gm" -> { mTom.value = 24}
-            "G#m" -> { mTom.value = 25}
-            "Am" -> { mTom.value = 26}
-            "A#m" -> { mTom.value = 27}
-            "Bm" -> { mTom.value = 28}
-            "Bbm" -> { mTom.value = 29}
-            "Abm" -> { mTom.value = 30}
-            "Gbm" -> { mTom.value = 31}
-            "Ebm" -> { mTom.value = 32}
-            "Dbm" -> { mTom.value = 33}
-        }
+        FirebaseFirestore.getInstance().collection("$banda").whereEqualTo("titulo", "$titulo").get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val cifra =  document.toObject(CifraModel::class.java)
+                    mCifra.value = "${cifra.cifra}"
+                    tomInicio = "${cifra.tom}"
+                    mFoto.value = "${cifra.foto}"
 
-        if(cifra != null) {
-            mCifra.value = cifra
-        }else{
-            mCifra.value = "Essa cifra não está disponível"
-        }
+                }
+
+                when (tomInicio) {
+                    // Maiores
+                    "C" -> { mTom.value = 0}
+                    "C#" -> { mTom.value = 1}
+                    "D" -> { mTom.value = 2}
+                    "D#" -> { mTom.value = 3}
+                    "E" -> { mTom.value = 4}
+                    "F" -> { mTom.value = 5}
+                    "F#" -> { mTom.value = 6}
+                    "G" -> { mTom.value = 7}
+                    "G#" -> { mTom.value = 8}
+                    "A" -> { mTom.value = 9}
+                    "A#" -> { mTom.value = 10}
+                    "B" -> { mTom.value = 11}
+                    "Bb" -> { mTom.value = 12}
+                    "Ab" -> { mTom.value = 13}
+                    "Gb" -> { mTom.value = 14}
+                    "Eb" -> { mTom.value = 15}
+                    "Db" -> { mTom.value = 16}
+                    // Menores
+                    "Cm" -> { mTom.value = 17}
+                    "C#m" -> { mTom.value = 18}
+                    "Dm" -> { mTom.value = 19}
+                    "D#m" -> { mTom.value = 20}
+                    "Em" -> { mTom.value = 21}
+                    "Fm" -> { mTom.value = 22}
+                    "F#m" -> { mTom.value = 23}
+                    "Gm" -> { mTom.value = 24}
+                    "G#m" -> { mTom.value = 25}
+                    "Am" -> { mTom.value = 26}
+                    "A#m" -> { mTom.value = 27}
+                    "Bm" -> { mTom.value = 28}
+                    "Bbm" -> { mTom.value = 29}
+                    "Abm" -> { mTom.value = 30}
+                    "Gbm" -> { mTom.value = 31}
+                    "Ebm" -> { mTom.value = 32}
+                    "Dbm" -> { mTom.value = 33}
+                }
+
+
+    }
+
+
+
+
+
 
     }
 

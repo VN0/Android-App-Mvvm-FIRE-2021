@@ -4,21 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
-import com.senne.cifragospel2021.model.CifraModel
+import com.senne.cifragospel2021.model.AllModel
 
 class AllViewModel : ViewModel() {
 
-    fun load(): LiveData<MutableList<CifraModel>> {
-        val mutableData = MutableLiveData<MutableList<CifraModel>>()
+    fun load(): LiveData<MutableList<AllModel>> {
+        val mutableData = MutableLiveData<MutableList<AllModel>>()
 
-        FirebaseFirestore.getInstance().collection("Morada").get()
+        FirebaseFirestore.getInstance().collection("Bandas").get()
                 .addOnSuccessListener {result ->
-                    val list = mutableListOf<CifraModel>()
+                    val list = mutableListOf<AllModel>()
                     for(document in result) {
-                        val cifra = document.toObject(CifraModel::class.java)
-                        list.add(
-                            CifraModel("${cifra.titulo}","${cifra.banda}","${cifra.tom}","${cifra.cifra}","${cifra.foto}")
-                        )
+                        val cifra = document.toObject(AllModel::class.java)
+                        list.add( AllModel("${cifra.banda}","${cifra.foto}") )
                     }
 
                     mutableData.value = list

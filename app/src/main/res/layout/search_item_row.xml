@@ -22,6 +22,7 @@
         android:text="Titulo"
         android:autoSizeTextType="uniform"
         android:textSize="18sp"
+        android:layout_marginLeft="12dp"
         app:layout_constraintLeft_toRightOf="@id/search_foto"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,9 +31,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="banda"
+        android:layout_marginLeft="12dp"
         android:textSize="13sp"
         app:layout_constraintLeft_toRightOf="@id/search_foto"
-        android:layout_marginLeft="12dp"
         app:layout_constraintTop_toBottomOf="@id/search_titlle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

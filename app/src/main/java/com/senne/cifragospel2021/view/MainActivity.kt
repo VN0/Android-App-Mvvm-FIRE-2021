@@ -1,6 +1,9 @@
 package com.senne.cifragospel2021.view
 
+import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -13,8 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.senne.cifragospel2021.R
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -24,14 +26,20 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
+
+        drawerLayout.setDrawerListener(this)
+
 
         appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.nav_search, R.id.nav_all, R.id.nav_myList), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
 
         val db = FirebaseFirestore.getInstance()
 
@@ -74,4 +82,20 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+    override fun onDrawerStateChanged(newState: Int) { }
+
+    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+        closeKeyboard(drawerView)
+    }
+
+    override fun onDrawerClosed(drawerView: View) { }
+
+    override fun onDrawerOpened(drawerView: View) { }
+
+    private fun closeKeyboard(view: View) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
 }

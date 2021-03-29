@@ -1,5 +1,6 @@
 package com.senne.cifragospel2021.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -7,7 +8,10 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -20,52 +24,74 @@ import com.senne.cifragospel2021.model.SearchModel
 import com.senne.cifragospel2021.viewModel.SearchViewModel
 import kotlinx.android.synthetic.main.search.*
 
+
 class SearchFragment : Fragment() {
 
     private lateinit var mSearchViewModel: SearchViewModel
-    private var searchList : List<SearchModel> = ArrayList()
+    private var searchList: List<SearchModel> = ArrayList()
     private val mAdapter = SearchAdapter(searchList)
     private lateinit var mListener: MusicListener
 
-    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         mSearchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
 
         val root = inflater.inflate(R.layout.search, container, false)
 
-        var recycler : RecyclerView = root.findViewById(R.id.recycler_search)
+        var recycler: RecyclerView = root.findViewById(R.id.recycler_search)
         recycler.hasFixedSize()
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = mAdapter
 
-    val editText: EditText = root.findViewById(R.id.edit_text)
-    editText.addTextChangedListener( object: TextWatcher {
-        override fun afterTextChanged(p0: Editable?) { }
 
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {  }
+        val editText: EditText = root.findViewById(R.id.edit_text)
 
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        editText.setOnFocusChangeListener { view, b ->
+            if(!b)  closeKeyboard(view)
+        }
 
-                if("$s".length > 3) {
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {}
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                if ("$s".length > 3) {
                     recycler_search.visibility = View.VISIBLE
                     search_results.visibility = View.GONE
+                    search_progress.visibility = View.VISIBLE
                     mSearchViewModel.load("$s".toLowerCase()).observe(viewLifecycleOwner, Observer {
+                        search_progress.visibility = View.GONE
+                        if(!it.isEmpty()) {
+                            closeKeyboard(root.rootView.findViewById(R.id.edit_text))
+                            search_results.text = getString(R.string.no_result)
+                        }else {
+                            search_results.text = getString(R.string.nothing)
+                            search_results.visibility = View.VISIBLE
+                        }
+
                         mAdapter.searchList = it
                         mAdapter.notifyDataSetChanged()
                     })
-                }else {
+                } else {
+                    search_results.text = getString(R.string.no_result)
                     search_results.visibility = View.VISIBLE
                     recycler_search.visibility = View.GONE
                 }
 
-        }
+            }
 
-    })
+        })
 
 
         mListener = object : MusicListener {
-            override fun onClick(titulo: String,banda: String, foto: String) {
+            override fun onClick(titulo: String, banda: String, foto: String) {
 
-                val intent = Intent(context,CifraActivity::class.java)
+                val intent = Intent(context, CifraActivity::class.java)
 
                 val bundle = Bundle()
                 bundle.putString("titulo", titulo)
@@ -76,7 +102,7 @@ class SearchFragment : Fragment() {
                 startActivity(intent)
             }
 
-            override fun onClickAll(banda: String) { }
+            override fun onClickAll(banda: String) {}
             override fun onClickMusics(banda: String, titulo: String) {}
 
         }
@@ -84,6 +110,12 @@ class SearchFragment : Fragment() {
 
         return root
     }
+
+    private fun closeKeyboard(view: View) {
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
 
 
 }

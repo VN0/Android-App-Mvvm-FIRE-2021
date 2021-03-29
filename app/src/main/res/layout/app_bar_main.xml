@@ -15,7 +15,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:background="@color/dark_orange"
             app:popupTheme="@style/Theme.CifraGospel2021.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>

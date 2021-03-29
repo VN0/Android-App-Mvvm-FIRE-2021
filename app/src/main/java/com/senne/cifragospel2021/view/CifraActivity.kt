@@ -1,5 +1,6 @@
 package com.senne.cifragospel2021.view
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -8,7 +9,9 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.TypedValue
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +19,7 @@ import com.senne.cifragospel2021.R
 import com.senne.cifragospel2021.viewModel.CifraViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cifra.*
-import kotlinx.android.synthetic.main.all.*
+
 
 class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -27,12 +30,11 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cifra)
 
-        if(supportActionBar != null) {
-            supportActionBar!!.hide()
-        }
+        if(supportActionBar != null) supportActionBar!!.hide()
 
         cifra_less.setOnClickListener(this)
         cifra_more.setOnClickListener(this)
+        back.setOnClickListener(this)
 
         mCifraViewModel = ViewModelProvider(this).get(CifraViewModel::class.java)
 
@@ -50,9 +52,7 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
         mCifraViewModel.banda.observe(this, Observer {
             cifra_banda.text = it
         })
-
         //Spinner
-
         cifra_tom.onItemSelectedListener = this
 
         val mListMaior = listOf("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "Bb", "Ab", "Gb", "Eb", "Db" )
@@ -62,19 +62,17 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
 
             for(i in 0..16) {
                 if (it == i) {
-                    cifra_tom.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMaior)
+                    cifra_tom.adapter = ArrayAdapter(this, R.layout.sppiner_item, mListMaior)
                     cifra_tom.setSelection(it)
                     break
                 } else {
                     val pos = it - 17
-                    cifra_tom.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mListMenor)
+                    cifra_tom.adapter = ArrayAdapter(this, R.layout.sppiner_item, mListMenor)
                     cifra_tom.setSelection(pos)
                 }
-
             }
 
         })
-
 
         mCifraViewModel.novoTom.observe(this, Observer {
 
@@ -89,7 +87,6 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
             Picasso.get().load(it).into(cifra_foto)
         })
 
-
     }
 
     fun setCifra(text: String): SpannableStringBuilder {
@@ -103,14 +100,12 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
             start = text.indexOf("&.", offset, true)
             end = text.indexOf("*.", offset2, true)
 
-
             while (start >= 0) {
 
                span.setSpan(StyleSpan(Typeface.BOLD), start + 2 , end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                span.setSpan( ForegroundColorSpan(resources.getColor(R.color.red)),  start + 2 , end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                span.setSpan( ForegroundColorSpan(resources.getColor(R.color.white)),  start  , start + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                span.setSpan( ForegroundColorSpan(resources.getColor(R.color.white)),  end  , end + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
 
                 offset2 = end + 2
                 offset = start + 2
@@ -120,7 +115,6 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
 
         return span
     }
-
 
     override fun onClick(v: View) {
         val id = v.id
@@ -132,6 +126,9 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
             R.id.cifra_more -> {
                 ourFontSize += 1f
                 cifra_cifra.setTextSize(TypedValue.COMPLEX_UNIT_SP, ourFontSize)
+            }
+            R.id.back -> {
+                finish()
             }
         }
     }
@@ -146,7 +143,5 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
             }
         }
 
-
     }
-
 }

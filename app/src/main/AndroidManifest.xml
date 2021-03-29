@@ -14,7 +14,6 @@
             android:label="@string/title_activity_musics_acitivity"
             android:theme="@style/Theme.CifraGospel2021.NoActionBar"></activity>
         <activity android:name=".view.CifraActivity" />
-        <activity android:name=".view.MusicActivity" />
         <activity
             android:name=".view.MainActivity"
             android:label="@string/app_name"

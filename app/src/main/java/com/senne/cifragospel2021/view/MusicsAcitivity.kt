@@ -62,7 +62,6 @@ class MusicsAcitivity : AppCompatActivity() {
                 val bundle = Bundle()
                 bundle.putString("titulo", titulo)
                 bundle.putString("banda", banda)
-
                 intent.putExtras(bundle)
 
                 startActivity(intent)

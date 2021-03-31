@@ -2,9 +2,10 @@ package com.senne.cifragospel2021.view
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.text.*
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ import com.senne.cifragospel2021.listener.MusicListener
 import com.senne.cifragospel2021.model.SearchModel
 import com.senne.cifragospel2021.viewModel.SearchViewModel
 import kotlinx.android.synthetic.main.search.*
+import kotlinx.android.synthetic.main.search.view.*
 
 
 class SearchFragment : Fragment() {
@@ -46,31 +48,52 @@ class SearchFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = mAdapter
 
+        // SPAN band_title
+        val fColorWhite = ForegroundColorSpan(resources.getColor(R.color.white))
+        val flag = Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+
+        val span = SpannableStringBuilder(getString(R.string.procure_por_t_tulo_ou_banda))
+        span.setSpan( ForegroundColorSpan(resources.getColor(R.color.fluorescent_orange)),11 , 18, flag)
+        span.setSpan( ForegroundColorSpan(resources.getColor(R.color.fluorescent_orange)),22 , 27, flag )
+        root.band_title.text = span
+
+        val ex1 = SpannableStringBuilder(getString(R.string.ex_1))
+        ex1.setSpan( fColorWhite,0 , 7, flag )
+        root.example1.text = ex1
+
+        val ex2 = SpannableStringBuilder(getString(R.string.ex_1))
+        ex2.setSpan( fColorWhite,10 , 14, flag )
+        root.example2.text = ex2
+
+        val ex3 = SpannableStringBuilder(getString(R.string.ex_2))
+        ex3.setSpan( fColorWhite,1 , 8, flag )
+        root.example3.text = ex3
+
+        val ex4 = SpannableStringBuilder(getString(R.string.ex_2))
+        ex4.setSpan( fColorWhite,13 , 19, flag )
+        root.example4.text = ex4
+
 
         val editText: EditText = root.findViewById(R.id.edit_text)
-
         editText.setOnFocusChangeListener { view, b ->
             if(!b)  closeKeyboard(view)
         }
 
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
-
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
                 if ("$s".length > 3) {
                     recycler_search.visibility = View.VISIBLE
-                    search_results.visibility = View.GONE
                     search_progress.visibility = View.VISIBLE
+                    tipLayout.visibility = View.GONE
                     mSearchViewModel.load("$s".toLowerCase()).observe(viewLifecycleOwner, Observer {
                         search_progress.visibility = View.GONE
                         if(!it.isEmpty()) {
                             closeKeyboard(root.rootView.findViewById(R.id.edit_text))
-                            search_results.text = getString(R.string.no_result)
+                            search_results.visibility = View.GONE
                         }else {
-                            search_results.text = getString(R.string.nothing)
                             search_results.visibility = View.VISIBLE
                         }
 
@@ -78,9 +101,9 @@ class SearchFragment : Fragment() {
                         mAdapter.notifyDataSetChanged()
                     })
                 } else {
-                    search_results.text = getString(R.string.no_result)
-                    search_results.visibility = View.VISIBLE
+                    tipLayout.visibility = View.VISIBLE
                     recycler_search.visibility = View.GONE
+                    search_results.visibility = View.GONE
                 }
 
             }

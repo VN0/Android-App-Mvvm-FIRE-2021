@@ -18,6 +18,8 @@
 
     <ProgressBar
         android:id="@+id/musics_progress"
+        style="?android:attr/progressBarStyle"
+        android:indeterminateDrawable="@drawable/cpb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"

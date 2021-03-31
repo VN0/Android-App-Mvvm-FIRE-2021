@@ -1,6 +1,5 @@
 package com.senne.cifragospel2021.view
 
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableStringBuilder

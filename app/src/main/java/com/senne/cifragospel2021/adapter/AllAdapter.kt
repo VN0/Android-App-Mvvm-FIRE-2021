@@ -41,6 +41,9 @@ class AllAdapter(private val context: AllFragment) : RecyclerView.Adapter<AllAda
     inner class MainViewHolder(itemView: View, private val listener: MusicListener): RecyclerView.ViewHolder(itemView) {
         fun bindView(cifra: AllModel) {
             itemView.all_banda.text = cifra.banda
+            if(cifra.foto == "https://studiosol-a.akamaihd.net/cc/img/desktop/thumb-art.svg?v=3") {
+                cifra.foto = "https://icon-library.com/images/music-icon/music-icon-2.jpg"
+            }
             Picasso.get().load(cifra.foto).into(itemView.all_photo)
 
             itemView.all_banda.setOnClickListener {

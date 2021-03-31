@@ -34,15 +34,16 @@ class CifraViewModel : ViewModel() {
         mTitulo.value = titulo
         mBanda.value = banda
 
-
         FirebaseFirestore.getInstance().collection("$banda").whereEqualTo("titulo", "$titulo").get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     val cifra =  document.toObject(CifraModel::class.java)
                     mCifra.value = "${cifra.cifra}"
                     tomInicio = "${cifra.tom}"
+                    if(cifra.foto == "https://studiosol-a.akamaihd.net/cc/img/desktop/thumb-art.svg?v=3") {
+                        cifra.foto = "https://icon-library.com/images/music-icon/music-icon-2.jpg"
+                    }
                     mFoto.value = "${cifra.foto}"
-
                 }
 
                 when (tomInicio) {
@@ -83,14 +84,7 @@ class CifraViewModel : ViewModel() {
                     "Ebm" -> { mTom.value = 32}
                     "Dbm" -> { mTom.value = 33}
                 }
-
-
     }
-
-
-
-
-
 
     }
 
@@ -264,7 +258,6 @@ class CifraViewModel : ViewModel() {
             else if (tomSpin == "A#" || tomSpin == "Bb" || tomSpin == "Gm") { mNovoTom.value = mCifra.value }
             else if (tomSpin == "B" || tomSpin == "G#m" || tomSpin == "Abm") { mNovoTom.value = "${mLasCifra.lassi(cifraTratada)}" }
 
-
         }else if( tomInicio == "B" || tomInicio == "Abm" || tomInicio == "G#m")  {
             if (tomSpin == "C" || tomSpin == "Am") { mNovoTom.value = "${mSiCifra.sido(cifraTratada)}" }
             else if (tomSpin == "C#" || tomSpin == "Db" || tomSpin == "A#m" || tomSpin == "Bbm") {mNovoTom.value = " ${mSiCifra.sidos(cifraTratada)}" }
@@ -278,14 +271,6 @@ class CifraViewModel : ViewModel() {
             else if (tomSpin == "A" || tomSpin == "F#m" || tomSpin == "Gbm") { mNovoTom.value = " ${mSiCifra.sila(cifraTratada)}" }
             else if (tomSpin == "A#" || tomSpin == "Bb" || tomSpin == "Gm") { mNovoTom.value = " ${mSiCifra.silas(cifraTratada)}" }
             else if (tomSpin == "B" || tomSpin == "G#m" || tomSpin == "Abm") { mNovoTom.value = mCifra.value }
-
         }
-
-
     }
-
-
-
-
 }
-

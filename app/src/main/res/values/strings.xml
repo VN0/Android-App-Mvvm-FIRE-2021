@@ -11,7 +11,7 @@
     <string name="menu_all">Ver todos</string>
     <string name="menu_myList">Minha lista</string>
     <string name="no_result">Digite no mínimo 4 caracteres</string>
-    <string name="nothing">Nenhum resultado encontrado</string>
+    <string name="nothing">*Nenhum resultado encontrado</string>
     <string name="title_activity_musics_acitivity">MusicsAcitivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -22,4 +22,12 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="fire_cifras_gospel_2021">Fire Cifras</string>
+    <string name="o_que_procura">O que procura ?</string>
+    <string name="dica_de_pesquisa">Dica de Pesquisa</string>
+    <string name="procure_pela_banda_ou_pelo_t_tulo">Procure por BANDA ou TÍTULO</string>
+    <string name="procure_por_t_tulo_ou_banda">Procure por TÍTULO ou BANDA</string>
+    <string name="first_second">Se o titulo ou banda possuir mais de uma palavra, pode digitar qual achar melhor</string>
+    <string name="exemplo">Exemplos</string>
+    <string name="ex_1">Diante do Trono </string>
+    <string name="ex_2">A alegria do Senhor </string>
 </resources>

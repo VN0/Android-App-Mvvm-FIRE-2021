@@ -5,32 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
+    android:background="@color/dark_blue"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:padding="8dp"
     tools:context=".view.SearchFragment">
 
-    <EditText
-        android:id="@+id/edit_text"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:hint="Buscar"
-        android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_text"
+            style="@style/StyledTilEditText"
+            android:layout_marginVertical="10dp"
+            android:hint="@string/no_result"
+            android:inputType="textPersonName"
+            android:padding="20dp"
+            android:textSize="18dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:padding="20dp"
+            android:src="@drawable/ic_baseline_search_24"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/dark_orange" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:layout_gravity="center"
         android:id="@+id/search_results"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/gray"
+        android:textColor="@color/red"
+        android:background="@color/white"
         android:textSize="16dp"
-        android:text="@string/no_result"
+        android:padding="4dp"
+        android:visibility="gone"
+        android:text="@string/nothing"
         />
 
     <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:indeterminateDrawable="@drawable/cpb"
         android:layout_gravity="center"
         android:id="@+id/search_progress"
         android:layout_width="wrap_content"
@@ -38,11 +61,136 @@
         android:visibility="gone"
         />
 
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:id="@+id/tipLayout"
+       xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+        android:layout_gravity="center"
+       android:clickable="true"
+       android:background="@color/dark_blue"
+       android:focusableInTouchMode="true"
+       android:orientation="vertical"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
+
+       <ImageView
+
+           android:id="@+id/foto"
+           android:layout_marginTop="75dp"
+           app:tint="@color/yellow"
+           android:layout_gravity="center"
+           android:layout_width="75dp"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintRight_toRightOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           android:layout_height="75dp"
+           android:src="@drawable/tip"/>
+
+       <TextView
+           android:id="@+id/dica"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="8dp"
+           android:textSize="20dp"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintRight_toRightOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/foto"
+           android:text="@string/dica_de_pesquisa"
+         android:gravity="center_horizontal"
+           android:textColor="@color/white"/>
+
+       <TextView
+           android:id="@+id/band_title"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="16dp"
+           android:text="@string/procure_por_t_tulo_ou_banda"
+           android:textSize="16dp"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintRight_toRightOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/dica"
+           android:layout_gravity="center"
+           android:textColor="@color/gray"/>
+
+       <TextView
+           android:id="@+id/exemplo"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="12dp"
+           android:textSize="20dp"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintRight_toRightOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/band_title"
+           android:text="@string/exemplo"
+           android:layout_gravity="center"
+           android:textColor="@color/yellow"/>
+
+       <TextView
+           android:id="@+id/example1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="6dp"
+           android:textAlignment="center"
+           android:text="@string/ex_1"
+           android:textSize="14dp"
+           android:paddingHorizontal="16dp"
+           android:layout_gravity="center"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintRight_toRightOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/exemplo"
+           android:textColor="@color/gray"/>
+
+       <TextView
+           android:id="@+id/example2"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="6dp"
+           android:textAlignment="center"
+           android:text="@string/ex_1"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintRight_toRightOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/example1"
+           android:textSize="14dp"
+           android:paddingHorizontal="16dp"
+           android:layout_gravity="center"
+           android:textColor="@color/gray"/>
+       <TextView
+           android:id="@+id/example3"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="6dp"
+           android:textAlignment="center"
+           android:text="@string/ex_2"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintRight_toRightOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/example2"
+           android:textSize="14dp"
+           android:paddingHorizontal="16dp"
+           android:layout_gravity="center"
+           android:textColor="@color/gray"/>
+       <TextView
+           android:id="@+id/example4"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="6dp"
+           android:textAlignment="center"
+           android:text="@string/ex_2"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintRight_toRightOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/example3"
+           android:textSize="14dp"
+           android:paddingHorizontal="16dp"
+           android:layout_gravity="center"
+           android:textColor="@color/gray"/>
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
    />
+
 
 </LinearLayout>

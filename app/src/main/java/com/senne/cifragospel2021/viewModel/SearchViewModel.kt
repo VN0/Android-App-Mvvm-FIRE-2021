@@ -19,7 +19,7 @@ class SearchViewModel : ViewModel() {
 
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
-            delay(500)
+            delay(600)
 
 
             FirebaseFirestore.getInstance().collection("Search")

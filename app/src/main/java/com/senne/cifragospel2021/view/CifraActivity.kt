@@ -15,15 +15,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.senne.cifragospel2021.R
+import com.senne.cifragospel2021.sharedPreferences.SecurityPreferences
 import com.senne.cifragospel2021.viewModel.CifraViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cifra.*
+import kotlin.random.Random
 
 
 class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private lateinit var mCifraViewModel: CifraViewModel
     private var ourFontSize = 16f
+    private lateinit var securityPreferences : SecurityPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +34,11 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
 
         if(supportActionBar != null) supportActionBar!!.hide()
 
+        securityPreferences = SecurityPreferences(this)
+
         cifra_less.setOnClickListener(this)
         cifra_more.setOnClickListener(this)
+        cifra_btn.setOnClickListener(this)
         back.setOnClickListener(this)
 
         mCifraViewModel = ViewModelProvider(this).get(CifraViewModel::class.java)
@@ -128,6 +134,15 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
             }
             R.id.back -> {
                 finish()
+            }
+            R.id.cifra_btn -> {
+                var key = securityPreferences.getString("email")
+                val bundle = intent.extras
+                    val titulo = bundle?.getString("titulo")
+                    val banda = bundle?.getString("banda")
+                mCifraViewModel.add("$key", "$titulo", "$banda")
+
+               Toast.makeText(this, "$key", Toast.LENGTH_LONG).show()
             }
         }
     }

@@ -23,7 +23,7 @@
             android:hint="@string/no_result"
             android:inputType="textPersonName"
             android:padding="20dp"
-            android:textSize="18dp"
+            android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/red"
         android:background="@color/white"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:padding="4dp"
         android:visibility="gone"
         android:text="@string/nothing"
@@ -92,7 +92,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginTop="8dp"
-           android:textSize="20dp"
+           android:textSize="20sp"
            app:layout_constraintLeft_toLeftOf="parent"
            app:layout_constraintRight_toRightOf="parent"
            app:layout_constraintTop_toBottomOf="@+id/foto"
@@ -106,7 +106,7 @@
            android:layout_height="wrap_content"
            android:layout_marginTop="16dp"
            android:text="@string/procure_por_t_tulo_ou_banda"
-           android:textSize="16dp"
+           android:textSize="16sp"
            app:layout_constraintLeft_toLeftOf="parent"
            app:layout_constraintRight_toRightOf="parent"
            app:layout_constraintTop_toBottomOf="@+id/dica"
@@ -118,7 +118,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginTop="12dp"
-           android:textSize="20dp"
+           android:textSize="20sp"
            app:layout_constraintLeft_toLeftOf="parent"
            app:layout_constraintRight_toRightOf="parent"
            app:layout_constraintTop_toBottomOf="@id/band_title"
@@ -133,7 +133,7 @@
            android:layout_marginTop="6dp"
            android:textAlignment="center"
            android:text="@string/ex_1"
-           android:textSize="14dp"
+           android:textSize="14sp"
            android:paddingHorizontal="16dp"
            android:layout_gravity="center"
            app:layout_constraintLeft_toLeftOf="parent"
@@ -151,7 +151,7 @@
            app:layout_constraintLeft_toLeftOf="parent"
            app:layout_constraintRight_toRightOf="parent"
            app:layout_constraintTop_toBottomOf="@id/example1"
-           android:textSize="14dp"
+           android:textSize="14sp"
            android:paddingHorizontal="16dp"
            android:layout_gravity="center"
            android:textColor="@color/gray"/>
@@ -165,7 +165,7 @@
            app:layout_constraintLeft_toLeftOf="parent"
            app:layout_constraintRight_toRightOf="parent"
            app:layout_constraintTop_toBottomOf="@id/example2"
-           android:textSize="14dp"
+           android:textSize="14sp"
            android:paddingHorizontal="16dp"
            android:layout_gravity="center"
            android:textColor="@color/gray"/>
@@ -179,7 +179,7 @@
            app:layout_constraintLeft_toLeftOf="parent"
            app:layout_constraintRight_toRightOf="parent"
            app:layout_constraintTop_toBottomOf="@id/example3"
-           android:textSize="14dp"
+           android:textSize="14sp"
            android:paddingHorizontal="16dp"
            android:layout_gravity="center"
            android:textColor="@color/gray"/>
@@ -189,7 +189,6 @@
         android:id="@+id/recycler_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
    />
 
 

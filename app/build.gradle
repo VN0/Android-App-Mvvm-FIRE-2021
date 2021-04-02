@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -35,6 +36,7 @@ android {
 }
 
 dependencies {
+    def room_version = "2.2.6"
     //Images
     implementation 'com.squareup.picasso:picasso:2.71828'
     // Firebase

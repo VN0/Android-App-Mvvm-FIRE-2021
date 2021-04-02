@@ -11,7 +11,7 @@ class AllViewModel : ViewModel() {
     fun load(): LiveData<MutableList<AllModel>> {
         val mutableData = MutableLiveData<MutableList<AllModel>>()
 
-        FirebaseFirestore.getInstance().collection("Bandas").get()
+        FirebaseFirestore.getInstance().collection("Bandas").orderBy("banda").get()
                 .addOnSuccessListener {result ->
                     val list = mutableListOf<AllModel>()
                     for(document in result) {

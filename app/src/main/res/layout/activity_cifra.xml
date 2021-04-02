@@ -32,6 +32,19 @@
             app:layout_constraintTop_toTopOf="@id/view"
             app:tint="@color/white" />
 
+        <Button
+            android:id="@+id/cifra_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="4dp"
+            android:textSize="10sp"
+            android:backgroundTint="@color/dark_orange"
+           app:layout_constraintRight_toRightOf="@+id/view"
+           app:layout_constraintTop_toTopOf="@id/view"
+            android:text="@string/adicionar_lista"
+            />
+
         <ImageView
             android:id="@+id/cifra_foto"
             android:layout_width="50dp"
@@ -71,7 +84,7 @@
             android:layout_marginLeft="8dp"
             android:text="Tom: "
             android:textColor="@color/gray"
-            android:textSize="14dp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/cifra_tom"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@id/cifra_tom" />

@@ -4,10 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MyListViewModel : ViewModel() {
+import com.google.firebase.firestore.FirebaseFirestore
+import com.senne.cifragospel2021.model.SearchModel
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is My List"
+class MyListViewModel: ViewModel() {
+
+    fun load(myList: String): LiveData<MutableList<SearchModel>> {
+        val mutableData = MutableLiveData<MutableList<SearchModel>>()
+        FirebaseFirestore.getInstance().collection("MyList ${myList}").get()
+            .addOnSuccessListener {result ->
+                val list = mutableListOf<SearchModel>()
+                for(document in result) {
+                    val cifra = document.toObject(SearchModel::class.java)
+                    list.add( SearchModel("${cifra.titulo}","${cifra.banda}", "${cifra.foto}"))
+                }
+                mutableData.value = list
+            }
+        return mutableData
     }
-    val text: LiveData<String> = _text
 }

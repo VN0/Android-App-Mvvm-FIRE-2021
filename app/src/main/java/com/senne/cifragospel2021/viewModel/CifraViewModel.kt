@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.senne.cifragospel2021.cifras.*
 import com.senne.cifragospel2021.model.CifraModel
+import kotlin.random.Random
 
 class CifraViewModel : ViewModel() {
 
@@ -29,12 +30,22 @@ class CifraViewModel : ViewModel() {
     private var mFoto = MutableLiveData<String>()
     val foto : LiveData<String> = mFoto
 
+    val db = FirebaseFirestore.getInstance()
+
+    fun add(key: String, titulo: String, banda: String) {
+        val band = HashMap<String, Any>()
+        band["titulo"] = "${titulo}"
+        band["banda"] = "${banda}"
+        band["foto"] = "${foto}"
+        db.collection("MyList ${key}").document("${titulo}").set(band)
+    }
+
     fun load(titulo: String, banda: String) {
 
         mTitulo.value = titulo
         mBanda.value = banda
 
-        FirebaseFirestore.getInstance().collection("$banda").whereEqualTo("titulo", "$titulo").get()
+        db.collection("$banda").whereEqualTo("titulo", "$titulo").get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     val cifra =  document.toObject(CifraModel::class.java)

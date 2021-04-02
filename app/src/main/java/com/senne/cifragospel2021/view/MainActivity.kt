@@ -1,6 +1,7 @@
 package com.senne.cifragospel2021.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -15,6 +16,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.senne.cifragospel2021.R
+import com.senne.cifragospel2021.sharedPreferences.SecurityPreferences
 
 class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
 
@@ -25,7 +27,6 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -39,8 +40,6 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
-
         val db = FirebaseFirestore.getInstance()
 
 
@@ -48,6 +47,7 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
 
 
     }
+
 
 
     private fun generateSimple(txt: String, keywords: MutableList<String>) {
@@ -84,14 +84,12 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
     }
 
     override fun onDrawerStateChanged(newState: Int) { }
+    override fun onDrawerClosed(drawerView: View) { }
+    override fun onDrawerOpened(drawerView: View) { }
 
     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
         closeKeyboard(drawerView)
     }
-
-    override fun onDrawerClosed(drawerView: View) { }
-
-    override fun onDrawerOpened(drawerView: View) { }
 
     private fun closeKeyboard(view: View) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

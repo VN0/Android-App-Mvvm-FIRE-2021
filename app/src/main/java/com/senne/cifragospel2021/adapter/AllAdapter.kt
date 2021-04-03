@@ -5,11 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.senne.cifragospel2021.R
+import com.senne.cifragospel2021.Utility
 import com.senne.cifragospel2021.listener.MusicListener
 import com.senne.cifragospel2021.model.AllModel
 import com.senne.cifragospel2021.view.AllFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.all_item_row.view.*
+import kotlinx.android.synthetic.main.musics_item_row.view.*
 
 class AllAdapter(private val context: AllFragment) : RecyclerView.Adapter<AllAdapter.MainViewHolder>() {
 
@@ -41,6 +43,9 @@ class AllAdapter(private val context: AllFragment) : RecyclerView.Adapter<AllAda
     inner class MainViewHolder(itemView: View, private val listener: MusicListener): RecyclerView.ViewHolder(itemView) {
         fun bindView(cifra: AllModel) {
             itemView.all_banda.text = cifra.banda
+
+            var utility = Utility()
+            utility.tamanhoBand(cifra.banda.length, itemView.all_banda)
             if(cifra.foto == "https://studiosol-a.akamaihd.net/cc/img/desktop/thumb-art.svg?v=3") {
                 cifra.foto = "https://icon-library.com/images/music-icon/music-icon-2.jpg"
             }

@@ -15,10 +15,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.senne.cifragospel2021.R
+import com.senne.cifragospel2021.Utility
 import com.senne.cifragospel2021.sharedPreferences.SecurityPreferences
 import com.senne.cifragospel2021.viewModel.CifraViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cifra.*
+import kotlinx.android.synthetic.main.my_list_row.view.*
 import kotlin.random.Random
 
 
@@ -48,6 +50,9 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
             val titulo = bundle.getString("titulo")
             val banda = bundle.getString("banda")
             mCifraViewModel.load("$titulo", "$banda")
+            var utility = Utility()
+            utility.tamamhoTitle(titulo!!.length,cifra_titulo)
+            utility.tamanhoBand(banda!!.length, cifra_banda)
         }
 
         mCifraViewModel.titulo.observe(this, Observer {
@@ -140,9 +145,10 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
                 val bundle = intent.extras
                     val titulo = bundle?.getString("titulo")
                     val banda = bundle?.getString("banda")
+
                 mCifraViewModel.add("$key", "$titulo", "$banda")
 
-               Toast.makeText(this, "$key", Toast.LENGTH_LONG).show()
+               Toast.makeText(this, getString(R.string.adicionado), Toast.LENGTH_LONG).show()
             }
         }
     }

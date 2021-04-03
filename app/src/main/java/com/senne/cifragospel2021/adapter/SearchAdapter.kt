@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.senne.cifragospel2021.R
+import com.senne.cifragospel2021.Utility
 import com.senne.cifragospel2021.listener.MusicListener
 import com.senne.cifragospel2021.model.SearchModel
 import com.squareup.picasso.Picasso
@@ -16,6 +17,10 @@ class SearchAdapter(var searchList: List<SearchModel>) : RecyclerView.Adapter<Se
 
     inner class SearchListViewHolder(itemView: View, private val listener: MusicListener): RecyclerView.ViewHolder(itemView) {
         fun bind(searchModel: SearchModel) {
+
+            var utility = Utility()
+            utility.tamamhoTitle(searchModel.titulo.length, itemView.search_titlle)
+            utility.tamanhoBand(searchModel.banda.length, itemView.search_band)
             itemView.search_titlle.text = searchModel.titulo
             itemView.search_band.text = searchModel.banda
             if(searchModel.foto == "https://studiosol-a.akamaihd.net/cc/img/desktop/thumb-art.svg?v=3") {

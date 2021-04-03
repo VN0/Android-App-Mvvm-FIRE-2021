@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="2dp"
+    android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
@@ -22,6 +22,7 @@
         android:autoSizeTextType="uniform"
         android:textSize="18sp"
         android:textColor="@color/white"
+        android:layout_marginTop="6dp"
         android:layout_marginLeft="12dp"
         app:layout_constraintLeft_toRightOf="@id/search_foto"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,9 +33,20 @@
         android:layout_height="wrap_content"
         android:text="banda"
         android:textColor="@color/fluorescent_orange"
+        android:layout_marginTop="6dp"
         android:layout_marginLeft="12dp"
         android:textSize="13sp"
         app:layout_constraintLeft_toRightOf="@id/search_foto"
         app:layout_constraintTop_toBottomOf="@id/search_titlle" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:layout_marginTop="8dp"
+        android:background="#46819AA3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_foto"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

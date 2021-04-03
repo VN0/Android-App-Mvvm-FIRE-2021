@@ -28,7 +28,10 @@
     <string name="procure_por_t_tulo_ou_banda">Procure por TÍTULO ou BANDA</string>
     <string name="first_second">Se o titulo ou banda possuir mais de uma palavra, pode digitar qual achar melhor</string>
     <string name="exemplo">Exemplos</string>
+    <string name="apagado">Apagado com sucesso</string>
+    <string name="adicionado">Adicionado à lista</string>
     <string name="ex_1">Diante do Trono </string>
     <string name="ex_2">A alegria do Senhor </string>
     <string name="adicionar_lista">Adicionar à lista</string>
+    <string name="a_lista_est_vazia">A lista está vazia</string>
 </resources>

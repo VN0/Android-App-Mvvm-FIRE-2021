@@ -18,6 +18,8 @@ import com.senne.cifragospel2021.listener.MusicListener
 import com.senne.cifragospel2021.model.SearchModel
 import com.senne.cifragospel2021.sharedPreferences.SecurityPreferences
 import com.senne.cifragospel2021.viewModel.MyListViewModel
+import kotlinx.android.synthetic.main.my_list.*
+import kotlinx.android.synthetic.main.search.*
 
 class MyListFragment : Fragment() {
 
@@ -41,6 +43,12 @@ class MyListFragment : Fragment() {
         var key = securityPreferences.getString("email")
 
         mMyListViewModel.load("$key").observe(viewLifecycleOwner, Observer {
+            if(!it.isEmpty()) {
+                myList_empty.visibility = View.GONE
+            }else {
+                myList_empty.visibility = View.VISIBLE
+            }
+            myList_progress.visibility = View.GONE
             mAdapter.searchList = it
             mAdapter.notifyDataSetChanged()
         })
@@ -60,7 +68,20 @@ class MyListFragment : Fragment() {
             }
 
             override fun onClickAll(banda: String) {}
-            override fun onClickMusics(banda: String, titulo: String) {}
+            override fun onClickMusics(banda: String, titulo: String) {
+                var documento = "$titulo $banda"
+                mMyListViewModel.delete("$key","$documento")
+                Toast.makeText(context, getString(R.string.apagado), Toast.LENGTH_SHORT).show()
+                mMyListViewModel.load("$key").observe(viewLifecycleOwner, Observer {
+                    if(!it.isEmpty()) {
+                        myList_empty.visibility = View.GONE
+                    }else {
+                        myList_empty.visibility = View.VISIBLE
+                    }
+                    mAdapter.searchList = it
+                    mAdapter.notifyDataSetChanged()
+                })
+            }
 
         }
         mAdapter.attachListener(mListener)

@@ -34,21 +34,13 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
 
         drawerLayout.setDrawerListener(this)
 
-
         appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.nav_search, R.id.nav_all, R.id.nav_myList), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         val db = FirebaseFirestore.getInstance()
-
-
-
-
-
     }
-
-
 
     private fun generateSimple(txt: String, keywords: MutableList<String>) {
 
@@ -77,7 +69,6 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
         return keyWords
     }
 
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -95,5 +86,4 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
 }

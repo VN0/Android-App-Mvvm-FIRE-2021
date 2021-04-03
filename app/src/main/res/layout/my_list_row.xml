@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="2dp"
+    android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
@@ -14,6 +14,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <ImageView
+        android:id="@+id/myList_delete"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        app:tint="#C6FFFFA7"
+
+        android:src="@drawable/ic_baseline_delete_24"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <TextView
         android:id="@+id/myList_titlle"
         android:layout_width="wrap_content"
@@ -21,6 +32,8 @@
         android:text="Titulo"
         android:autoSizeTextType="uniform"
         android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="6dp"
         android:layout_marginLeft="12dp"
         app:layout_constraintLeft_toRightOf="@+id/myList_foto"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -30,9 +43,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="banda"
+        android:textColor="@color/fluorescent_orange"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="6dp"
         android:layout_marginLeft="12dp"
         android:textSize="13sp"
         app:layout_constraintLeft_toRightOf="@+id/myList_foto"
-        app:layout_constraintBottom_toBottomOf="@+id/myList_titlle" />
+        app:layout_constraintTop_toBottomOf="@id/myList_titlle" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:layout_marginTop="8dp"
+        android:background="#46819AA3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/myList_foto"
+        />
+    <View
+        android:id="@+id/myList_view"
+        android:layout_width="match_parent"
+        android:layout_marginRight="45dp"
+        android:layout_height="1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

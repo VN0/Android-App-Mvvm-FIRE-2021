@@ -10,6 +10,8 @@ import kotlin.random.Random
 
 class CifraViewModel : ViewModel() {
 
+    private lateinit var photoBanda: String
+
     private var mTitulo = MutableLiveData<String>()
     val titulo : LiveData<String> = mTitulo
 
@@ -36,8 +38,8 @@ class CifraViewModel : ViewModel() {
         val band = HashMap<String, Any>()
         band["titulo"] = "${titulo}"
         band["banda"] = "${banda}"
-        band["foto"] = "${foto}"
-        db.collection("MyList ${key}").document("${titulo}").set(band)
+        band["foto"] = "${photoBanda}"
+        db.collection("MyList ${key}").document("$titulo $banda").set(band)
     }
 
     fun load(titulo: String, banda: String) {
@@ -55,6 +57,7 @@ class CifraViewModel : ViewModel() {
                         cifra.foto = "https://icon-library.com/images/music-icon/music-icon-2.jpg"
                     }
                     mFoto.value = "${cifra.foto}"
+                    photoBanda = "${cifra.foto}"
                 }
 
                 when (tomInicio) {

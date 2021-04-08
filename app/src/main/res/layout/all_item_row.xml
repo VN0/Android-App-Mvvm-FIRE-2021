@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
+    android:clickable="true"
+    android:id="@+id/all_container"
     android:orientation="vertical"
     android:padding="8dp">
-
 
     <ImageView
         android:id="@+id/all_photo"
@@ -15,30 +15,38 @@
         android:layout_height="50dp"
         android:background="#eee"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-
-    <TextView
-        android:id="@+id/all_banda"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Banda"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="16dp"
-
-        android:textSize="16sp"
+        android:orientation="vertical"
         app:layout_constraintLeft_toRightOf="@id/all_photo"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/all_photo"
+        app:layout_constraintBottom_toBottomOf="@id/all_photo">
+
+        <TextView
+            android:id="@+id/all_banda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:text="Banda"
+            android:textColor="@color/dark_blue"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-
         android:layout_marginTop="8dp"
         android:background="#eee"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/all_photo"
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

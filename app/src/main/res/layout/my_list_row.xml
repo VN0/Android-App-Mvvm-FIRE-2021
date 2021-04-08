@@ -3,53 +3,51 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:clickable="true"
+    android:id="@+id/myList_container"
     android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/myList_foto"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="#C6FFFFFF"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageView
-        android:id="@+id/myList_delete"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        app:tint="#C6FFFFA7"
-
-        android:src="@drawable/ic_baseline_delete_24"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
-        android:id="@+id/myList_titlle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Titulo"
-        android:autoSizeTextType="uniform"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="12dp"
-        app:layout_constraintLeft_toRightOf="@+id/myList_foto"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:orientation="vertical"
+        app:layout_constraintLeft_toRightOf="@id/myList_foto"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/myList_band"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="banda"
-        android:textColor="@color/fluorescent_orange"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="12dp"
-        android:textSize="13sp"
-        app:layout_constraintLeft_toRightOf="@+id/myList_foto"
-        app:layout_constraintTop_toBottomOf="@id/myList_titlle" />
+        <TextView
+            android:id="@+id/myList_titlle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:text="Titulo "
+
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/myList_band"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:text="Banda"
+            android:textColor="@color/fluorescent_orange"
+            android:textSize="14sp" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -58,15 +56,7 @@
         android:layout_marginTop="8dp"
         android:background="#46819AA3"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myList_foto"
-        />
-    <View
-        android:id="@+id/myList_view"
-        android:layout_width="match_parent"
-        android:layout_marginRight="45dp"
-        android:layout_height="1dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
         />
 
 

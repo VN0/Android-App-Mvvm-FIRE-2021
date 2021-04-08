@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import com.senne.cifragospel2021.model.MusicsModel
 
 class MusicsViewModel : ViewModel() {
@@ -23,7 +24,7 @@ class MusicsViewModel : ViewModel() {
                 val list = mutableListOf<MusicsModel>()
                 for (document in result) {
                     val cifra = document.toObject(MusicsModel::class.java)
-                    list.add( MusicsModel("${cifra.titulo}","${cifra.banda}" ) )
+                    list.add( MusicsModel("${cifra.titulo}","${cifra.banda}") )
                 }
 
                 mutableData.value = list

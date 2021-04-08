@@ -1,5 +1,6 @@
 package com.senne.cifragospel2021.view
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -14,21 +15,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.senne.cifragospel2021.R
-import com.senne.cifragospel2021.Utility
 import com.senne.cifragospel2021.sharedPreferences.SecurityPreferences
 import com.senne.cifragospel2021.viewModel.CifraViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cifra.*
-import kotlinx.android.synthetic.main.my_list_row.view.*
-import kotlin.random.Random
 
 
 class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private lateinit var mCifraViewModel: CifraViewModel
-    private var ourFontSize = 16f
+    private var ourFontSize = 14f
     private lateinit var securityPreferences : SecurityPreferences
+    lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +40,15 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
 
         securityPreferences = SecurityPreferences(this)
 
+        MobileAds.initialize(this) {}
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
         cifra_less.setOnClickListener(this)
         cifra_more.setOnClickListener(this)
         cifra_btn.setOnClickListener(this)
+        cifra_banda.setOnClickListener(this)
         back.setOnClickListener(this)
 
         mCifraViewModel = ViewModelProvider(this).get(CifraViewModel::class.java)
@@ -50,9 +58,6 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
             val titulo = bundle.getString("titulo")
             val banda = bundle.getString("banda")
             mCifraViewModel.load("$titulo", "$banda")
-            var utility = Utility()
-            utility.tamamhoTitle(titulo!!.length,cifra_titulo)
-            utility.tamanhoBand(banda!!.length, cifra_banda)
         }
 
         mCifraViewModel.titulo.observe(this, Observer {
@@ -90,13 +95,11 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
 
             cifra_cifra.text = setCifra(itEdited)
             cifra_progress.visibility = View.GONE
-
         })
 
         mCifraViewModel.foto.observe(this, Observer {
             Picasso.get().load(it).into(cifra_foto)
         })
-
     }
 
     fun setCifra(text: String): SpannableStringBuilder {
@@ -122,7 +125,6 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
                 start = text.indexOf("&.", offset, true)
                 end = text.indexOf("*.", offset2, true)
             }
-
         return span
     }
 
@@ -150,6 +152,18 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
 
                Toast.makeText(this, getString(R.string.adicionado), Toast.LENGTH_LONG).show()
             }
+            R.id.cifra_banda -> {
+                val intent = Intent(this,MusicsAcitivity::class.java)
+                val bundle = Bundle()
+                mCifraViewModel.banda.observe(this, Observer {
+                    bundle.putString("banda", it)
+                })
+                mCifraViewModel.foto.observe(this, Observer {
+                    bundle.putString("foto", it)
+                })
+                intent.putExtras(bundle)
+                startActivity(intent)
+            }
         }
     }
 
@@ -162,6 +176,5 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
                 mCifraViewModel.mudaTom("$nota")
             }
         }
-
     }
 }

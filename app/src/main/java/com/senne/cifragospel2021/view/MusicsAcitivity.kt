@@ -1,6 +1,6 @@
 package com.senne.cifragospel2021.view
 
-import android.app.Activity
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -14,8 +14,8 @@ import com.senne.cifragospel2021.adapter.MusicsAdapter
 import com.senne.cifragospel2021.listener.MusicListener
 import com.senne.cifragospel2021.model.MusicsModel
 import com.senne.cifragospel2021.viewModel.MusicsViewModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_musics.*
-import kotlinx.android.synthetic.main.all.*
 
 
 class MusicsAcitivity : AppCompatActivity() {
@@ -31,7 +31,9 @@ class MusicsAcitivity : AppCompatActivity() {
 
         if(supportActionBar != null) supportActionBar!!.hide()
 
-
+        musics_back.setOnClickListener {
+            finish()
+        }
 
         mMusicsViewModel = ViewModelProvider(this).get(MusicsViewModel::class.java)
 
@@ -44,6 +46,9 @@ class MusicsAcitivity : AppCompatActivity() {
         if (bundle != null) {
             val banda = bundle.getString("banda")
             val photo = bundle.getString("foto")
+            Picasso.get().load("$photo").into(musics_image)
+            musics_titlle.text = "$banda"
+
             mMusicsViewModel.foto("$photo", "$banda")
             mMusicsViewModel.load("$banda").observe(this, Observer {
                 mAdapter.searchList = it
@@ -53,9 +58,8 @@ class MusicsAcitivity : AppCompatActivity() {
         }
 
         mListener = object : MusicListener {
-            override fun onClick(titulo: String,banda: String, foto: String) { }
-
-            override fun onClickAll(banda: String) { }
+            override fun onClick(titulo: String,banda: String, foto: String) {}
+            override fun onClickAll(banda: String, foto: String) {}
             override fun onClickMusics(banda: String, titulo: String) {
                 val intent = Intent(this@MusicsAcitivity,CifraActivity::class.java)
 

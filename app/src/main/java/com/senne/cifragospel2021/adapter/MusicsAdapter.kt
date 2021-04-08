@@ -5,12 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.senne.cifragospel2021.R
-import com.senne.cifragospel2021.Utility
 import com.senne.cifragospel2021.listener.MusicListener
 import com.senne.cifragospel2021.model.MusicsModel
 import kotlinx.android.synthetic.main.musics_item_row.view.*
-import kotlinx.android.synthetic.main.search_item_row.view.*
-
 
 class MusicsAdapter(var searchList: List<MusicsModel>) : RecyclerView.Adapter<MusicsAdapter.MusicsListViewHolder>() {
 
@@ -18,13 +15,9 @@ class MusicsAdapter(var searchList: List<MusicsModel>) : RecyclerView.Adapter<Mu
 
     inner class MusicsListViewHolder(itemView: View, private val listener: MusicListener): RecyclerView.ViewHolder(itemView) {
         fun bind(searchModel: MusicsModel) {
-            itemView.musics_titlle.text = searchModel.titulo
+            itemView.musics_banda.text = searchModel.titulo
 
-            var utility = Utility()
-            utility.tamamhoTitle(searchModel.titulo.length, itemView.musics_titlle)
-
-
-            itemView.musics_titlle.setOnClickListener {
+            itemView.musics_container.setOnClickListener {
                 listener.onClickMusics(searchModel.banda, searchModel.titulo)
             }
         }

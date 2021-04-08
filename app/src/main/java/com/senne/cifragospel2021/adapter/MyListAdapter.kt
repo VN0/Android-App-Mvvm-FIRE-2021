@@ -1,11 +1,9 @@
 package com.senne.cifragospel2021.adapter
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.app.AlertDialog
+import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.senne.cifragospel2021.R
-import com.senne.cifragospel2021.Utility
 import com.senne.cifragospel2021.listener.MusicListener
 import com.senne.cifragospel2021.model.SearchModel
 import com.squareup.picasso.Picasso
@@ -15,12 +13,8 @@ class MyListAdapter(var searchList: List<SearchModel>) : RecyclerView.Adapter<My
 
     private lateinit var mListener: MusicListener
 
-    inner class MyListAdapterViewHolder(itemView: View, private val listener: MusicListener): RecyclerView.ViewHolder(itemView) {
+    inner class MyListAdapterViewHolder(itemView: View, private val listener: MusicListener): RecyclerView.ViewHolder(itemView), View.OnCreateContextMenuListener {
         fun bind(searchModel: SearchModel) {
-
-            var utility = Utility()
-            utility.tamamhoTitle(searchModel.titulo.length,itemView.myList_titlle)
-            utility.tamanhoBand(searchModel.banda.length, itemView.myList_band)
 
             itemView.myList_titlle.text = searchModel.titulo
             itemView.myList_band.text = searchModel.banda
@@ -28,13 +22,31 @@ class MyListAdapter(var searchList: List<SearchModel>) : RecyclerView.Adapter<My
                 searchModel.foto = "https://icon-library.com/images/music-icon/music-icon-2.jpg"
             }
             Picasso.get().load(searchModel.foto).into(itemView.myList_foto)
-            itemView.myList_titlle.setOnClickListener {
+            itemView.myList_container.setOnClickListener {
                 listener.onClick(searchModel.titulo, searchModel.banda, searchModel.foto)
             }
 
-            itemView.myList_delete.setOnClickListener {
-                listener.onClickMusics(searchModel.banda, searchModel.titulo)
-            }
+            itemView.myList_container.setOnLongClickListener(View.OnLongClickListener {
+                AlertDialog.Builder(itemView.context)
+                    .setTitle("${searchModel.titulo}")
+                    .setMessage(R.string.deseja_remover)
+                    .setPositiveButton(R.string.sim) {dialog, which ->
+                        listener.onClickMusics(searchModel.banda, searchModel.titulo)
+                    }
+                    .setNeutralButton(R.string.nao, null)
+                    .show()
+
+                true
+            })
+        }
+
+        override fun onCreateContextMenu(
+            menu: ContextMenu?,
+            p1: View?,
+            p2: ContextMenu.ContextMenuInfo?
+        ) {
+            if (menu != null) { menu.add(Menu.NONE, R.id.excluir, Menu.NONE, "Excluir") }
+            if (menu != null) { menu.add(Menu.NONE, R.id.cancelar, Menu.NONE, "Cancelar") }
         }
     }
 

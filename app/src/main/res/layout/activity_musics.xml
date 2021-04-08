@@ -1,20 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="8dp"
-    android:orientation="vertical"
     tools:context=".view.MusicsAcitivity">
+
+    <View
+        android:id="@+id/musics_bar"
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        android:background="@color/dark_blue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/musics_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
+
+        android:src="@drawable/back"
+        app:layout_constraintLeft_toLeftOf="@id/musics_bar"
+        app:layout_constraintTop_toTopOf="@id/musics_bar"
+        app:tint="@color/white"/>
+
+    <ImageView
+        android:id="@+id/musics_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#eee"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/musics_bar"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toRightOf="@id/musics_image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/musics_image"
+        app:layout_constraintBottom_toBottomOf="@id/musics_image">
+
+    <TextView
+        android:id="@+id/musics_titlle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:text="Titulo"
+        android:textColor="@color/yellow"
+        android:textSize="20sp" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_musics"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="138dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/musics_bar"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <ProgressBar
         android:id="@+id/musics_progress"

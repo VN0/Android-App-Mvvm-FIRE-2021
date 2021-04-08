@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Fire Cifras</string>
+    <string name="menu_search">Búsqueda</string>
+    <string name="menu_all">Ver todo</string>
+    <string name="menu_myList">Mi lista</string>
+    <string name="no_result">Ingrese al menos 2 caracteres</string>
+    <string name="nothing">Ningún resultado encontrado</string>
+    <string name="title_activity_musics_acitivity">MusicsAcitivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="fire_cifras_gospel_2021">Fire Cifras</string>
+    <string name="dica_de_pesquisa">Sugerencia de búsqueda</string>
+    <string name="procure_por_t_tulo_ou_banda" translatable="false">Buscar por TÍTULO o BANDA</string>
+    <string name="exemplo">EJEMPLOS</string>
+    <string name="apagado">Eliminado con éxito</string>
+    <string name="adicionado">Agregado a la lista</string>
+    <string name="nao">No</string>
+    <string name="sim">Sí</string>
+    <string name="deseja_remover">Estás seguro de que desea eliminar?</string>
+    <string name="remover_da_lista">Quitar de la lista</string>
+    <string name="ex_1">Diante do Trono </string>
+    <string name="ex_2">A alegria do Senhor </string>
+    <string name="adicionar_lista">Agregar a la lista</string>
+    <string name="a_lista_est_vazia">La lista está vacía</string>
+</resources>

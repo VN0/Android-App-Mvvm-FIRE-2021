@@ -17,7 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             android:clickable="true"
             android:focusableInTouchMode="true"
-            android:background="@color/dark_orange"
+            android:background="@color/fluorescent_orange"
             app:popupTheme="@style/Theme.CifraGospel2021.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>

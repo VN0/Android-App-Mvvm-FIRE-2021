@@ -3,6 +3,7 @@ package com.senne.cifragospel2021.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -67,7 +68,7 @@ class MyListFragment : Fragment() {
                 startActivity(intent)
             }
 
-            override fun onClickAll(banda: String) {}
+            override fun onClickAll(banda: String, foto: String) {}
             override fun onClickMusics(banda: String, titulo: String) {
                 var documento = "$titulo $banda"
                 mMyListViewModel.delete("$key","$documento")

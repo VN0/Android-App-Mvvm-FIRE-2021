@@ -15,7 +15,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.Source
 import com.senne.cifragospel2021.R
+import com.senne.cifragospel2021.model.AllModel
+import com.senne.cifragospel2021.model.SearchModel
 import com.senne.cifragospel2021.sharedPreferences.SecurityPreferences
 
 class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
@@ -40,6 +44,14 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
         navView.setupWithNavController(navController)
 
         val db = FirebaseFirestore.getInstance()
+        //------------------------------------------------------------------------------//
+        //                 C O L O C A   C á   T E U   B A N C O
+        //------------------------------------------------------------------------------//
+
+
+
+
+
     }
 
     private fun generateSimple(txt: String, keywords: MutableList<String>) {
@@ -85,5 +97,13 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
     private fun closeKeyboard(view: View) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun loading(result: QuerySnapshot) {
+        val list = mutableListOf<AllModel>()
+        for(document in result) {
+            val cifra = document.toObject(AllModel::class.java)
+            list.add( AllModel("${cifra.banda}","${cifra.foto}") )
+        }
     }
 }

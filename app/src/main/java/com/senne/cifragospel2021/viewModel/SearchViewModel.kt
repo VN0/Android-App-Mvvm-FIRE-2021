@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import com.senne.cifragospel2021.model.SearchModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -18,7 +19,7 @@ class SearchViewModel : ViewModel() {
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
             delay(600)
-            FirebaseFirestore.getInstance().collection("Search")
+            FirebaseFirestore.getInstance().collection("Search").limit(15)
                 .whereArrayContains("key_words", searchText).get()
                 .addOnSuccessListener { result ->
                     val list = mutableListOf<SearchModel>()

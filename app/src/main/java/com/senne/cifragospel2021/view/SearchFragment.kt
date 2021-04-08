@@ -52,11 +52,6 @@ class SearchFragment : Fragment() {
         val fColorWhite = ForegroundColorSpan(resources.getColor(R.color.white))
         val flag = Spannable.SPAN_INCLUSIVE_EXCLUSIVE
 
-        val span = SpannableStringBuilder(getString(R.string.procure_por_t_tulo_ou_banda))
-        span.setSpan( ForegroundColorSpan(resources.getColor(R.color.fluorescent_orange)),11 , 18, flag)
-        span.setSpan( ForegroundColorSpan(resources.getColor(R.color.fluorescent_orange)),22 , 27, flag )
-        root.band_title.text = span
-
         val ex1 = SpannableStringBuilder(getString(R.string.ex_1))
         ex1.setSpan( fColorWhite,0 , 7, flag )
         root.example1.text = ex1
@@ -84,7 +79,7 @@ class SearchFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                if ("$s".length > 3) {
+                if ("$s".length > 1) {
                     recycler_search.visibility = View.VISIBLE
                     search_progress.visibility = View.VISIBLE
                     tipLayout.visibility = View.GONE
@@ -105,27 +100,30 @@ class SearchFragment : Fragment() {
                     recycler_search.visibility = View.GONE
                     search_results.visibility = View.GONE
                 }
-
             }
-
         })
-
 
         mListener = object : MusicListener {
             override fun onClick(titulo: String, banda: String, foto: String) {
 
                 val intent = Intent(context, CifraActivity::class.java)
-
                 val bundle = Bundle()
                 bundle.putString("titulo", titulo)
                 bundle.putString("banda", banda)
 
                 intent.putExtras(bundle)
-
                 startActivity(intent)
             }
 
-            override fun onClickAll(banda: String) {}
+            override fun onClickAll(banda: String, foto: String) {
+                val intent = Intent(context,MusicsAcitivity::class.java)
+                val bundle = Bundle()
+                    bundle.putString("banda", banda)
+                    bundle.putString("foto", foto)
+
+                intent.putExtras(bundle)
+                startActivity(intent)
+            }
             override fun onClickMusics(banda: String, titulo: String) {}
 
         }
@@ -138,7 +136,4 @@ class SearchFragment : Fragment() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
-
-
 }

@@ -40,12 +40,13 @@ class AllFragment : Fragment() {
             override fun onClick(titulo: String, banda: String, foto: String) { }
             override fun onClickMusics(banda: String, titulo: String) {}
 
-            override fun onClickAll(banda: String) {
+            override fun onClickAll(banda: String, foto: String) {
 
                 val intent = Intent(context,MusicsAcitivity::class.java)
 
                 val bundle = Bundle()
                 bundle.putString("banda", banda)
+                bundle.putString("foto", foto)
 
                 intent.putExtras(bundle)
 

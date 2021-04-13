@@ -39,11 +39,10 @@ class CifraViewModel : ViewModel() {
         band["titulo"] = "${titulo}"
         band["banda"] = "${banda}"
         band["foto"] = "${photoBanda}"
-        db.collection("MyList ${key}").document("$titulo $banda").set(band)
+        db.collection("MyList ${key}").document("${titulo.replace("/","")} ${banda.replace("/","")}").set(band)
     }
 
     fun load(titulo: String, banda: String) {
-
         mTitulo.value = titulo
         mBanda.value = banda
 

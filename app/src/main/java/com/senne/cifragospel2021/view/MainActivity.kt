@@ -3,11 +3,13 @@ package com.senne.cifragospel2021.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -44,9 +46,7 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
         navView.setupWithNavController(navController)
 
         val db = FirebaseFirestore.getInstance()
-        //------------------------------------------------------------------------------//
-        //                 C O L O C A   C á   T E U   B A N C O
-        //------------------------------------------------------------------------------//
+
 
 
 
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
                 appendString += inputString[charPosition].toString().replace("á","a").replace("ã","a")
                     .replace("â","a").replace("é","e").replace("ê","e")
                     .replace("í","i").replace("ó","o").replace("ô","o").replace("ú","u")
-                if(appendString.length > 3) {
+                if(appendString.length > 1) {
                     keywords.add(appendString.toLowerCase())
                 }
 

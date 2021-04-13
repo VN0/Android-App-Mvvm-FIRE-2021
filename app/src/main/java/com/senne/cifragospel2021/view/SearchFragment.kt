@@ -26,7 +26,6 @@ import com.senne.cifragospel2021.viewModel.SearchViewModel
 import kotlinx.android.synthetic.main.search.*
 import kotlinx.android.synthetic.main.search.view.*
 
-
 class SearchFragment : Fragment() {
 
     private lateinit var mSearchViewModel: SearchViewModel

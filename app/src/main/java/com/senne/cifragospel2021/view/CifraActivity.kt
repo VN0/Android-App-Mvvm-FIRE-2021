@@ -23,13 +23,14 @@ import com.senne.cifragospel2021.sharedPreferences.SecurityPreferences
 import com.senne.cifragospel2021.viewModel.CifraViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cifra.*
+import kotlin.properties.Delegates
 
 
 class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private lateinit var mCifraViewModel: CifraViewModel
-    private var ourFontSize = 14f
     private lateinit var securityPreferences : SecurityPreferences
+    private var ourFontSize = 14f
     lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +63,11 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
 
         mCifraViewModel.titulo.observe(this, Observer {
             cifra_titulo.text = it
+
+            var fonte = securityPreferences.getString("$it")
+            if(fonte != "" && fonte != null) {
+                cifra_cifra.setTextSize(TypedValue.COMPLEX_UNIT_SP, fonte.toFloat())
+            }
         })
 
         mCifraViewModel.banda.observe(this, Observer {
@@ -132,12 +138,36 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
         val id = v.id
         when(id) {
             R.id.cifra_less -> {
-                ourFontSize -= 1f
-                cifra_cifra.setTextSize(TypedValue.COMPLEX_UNIT_SP, ourFontSize)
+                mCifraViewModel.titulo.observe(this, Observer {
+                    var fonte = securityPreferences.getString("$it")
+                    if(fonte != "" && fonte != null) {
+                        var newFont = fonte.toFloat()
+                        newFont -= 1f
+                        cifra_cifra.setTextSize(TypedValue.COMPLEX_UNIT_SP,newFont )
+                        securityPreferences.storeString("$it","$newFont")
+                    }else {
+                        ourFontSize -= 1f
+                        cifra_cifra.setTextSize(TypedValue.COMPLEX_UNIT_SP, ourFontSize)
+                        securityPreferences.storeString("$it","$ourFontSize")
+                    }
+                })
+
             }
             R.id.cifra_more -> {
-                ourFontSize += 1f
-                cifra_cifra.setTextSize(TypedValue.COMPLEX_UNIT_SP, ourFontSize)
+                mCifraViewModel.titulo.observe(this, Observer {
+                    var fonte = securityPreferences.getString("$it")
+                    if(fonte != "" && fonte != null) {
+                        var newFont = fonte.toFloat()
+                        newFont += 1f
+                        cifra_cifra.setTextSize(TypedValue.COMPLEX_UNIT_SP,newFont )
+                        securityPreferences.storeString("$it","${newFont}")
+                    }else {
+                        ourFontSize += 1f
+                        cifra_cifra.setTextSize(TypedValue.COMPLEX_UNIT_SP, ourFontSize)
+                        securityPreferences.storeString("$it","$ourFontSize")
+                    }
+                })
+
             }
             R.id.back -> {
                 finish()

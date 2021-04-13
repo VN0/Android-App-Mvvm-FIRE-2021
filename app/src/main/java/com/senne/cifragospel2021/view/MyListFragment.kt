@@ -12,6 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.senne.cifragospel2021.R
 import com.senne.cifragospel2021.adapter.MyListAdapter
 import com.senne.cifragospel2021.adapter.SearchAdapter
@@ -29,10 +32,16 @@ class MyListFragment : Fragment() {
     private val mAdapter = MyListAdapter(myList)
     private lateinit var mListener: MusicListener
     private lateinit var securityPreferences : SecurityPreferences
+    lateinit var mAdView : AdView
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle? ): View? {
         mMyListViewModel = ViewModelProvider(this).get(MyListViewModel::class.java)
         val root = inflater.inflate(R.layout.my_list, container, false)
+
+        MobileAds.initialize(context) {}
+        mAdView = root.findViewById(R.id.adView2)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         securityPreferences = SecurityPreferences(requireContext())
 
@@ -70,7 +79,7 @@ class MyListFragment : Fragment() {
 
             override fun onClickAll(banda: String, foto: String) {}
             override fun onClickMusics(banda: String, titulo: String) {
-                var documento = "$titulo $banda"
+                var documento = "${titulo.replace("/","")} ${banda.replace("/","")}"
                 mMyListViewModel.delete("$key","$documento")
                 Toast.makeText(context, getString(R.string.apagado), Toast.LENGTH_SHORT).show()
                 mMyListViewModel.load("$key").observe(viewLifecycleOwner, Observer {

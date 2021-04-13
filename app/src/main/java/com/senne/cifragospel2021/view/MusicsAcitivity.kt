@@ -9,6 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.senne.cifragospel2021.R
 import com.senne.cifragospel2021.adapter.MusicsAdapter
 import com.senne.cifragospel2021.listener.MusicListener
@@ -24,6 +27,7 @@ class MusicsAcitivity : AppCompatActivity() {
     private var searchList : List<MusicsModel> = ArrayList()
     private val mAdapter = MusicsAdapter(searchList)
     private lateinit var mListener: MusicListener
+    lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +38,10 @@ class MusicsAcitivity : AppCompatActivity() {
         musics_back.setOnClickListener {
             finish()
         }
-
+        MobileAds.initialize(this) {}
+        mAdView = findViewById(R.id.adView4)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
         mMusicsViewModel = ViewModelProvider(this).get(MusicsViewModel::class.java)
 
         var recycler : RecyclerView = findViewById(R.id.recycler_musics)

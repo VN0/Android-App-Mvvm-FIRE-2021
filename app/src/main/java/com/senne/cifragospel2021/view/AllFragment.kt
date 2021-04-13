@@ -10,6 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.senne.cifragospel2021.R
 import com.senne.cifragospel2021.adapter.AllAdapter
 import com.senne.cifragospel2021.listener.MusicListener
@@ -22,8 +25,10 @@ class AllFragment : Fragment() {
     private lateinit var mAllViewModel: AllViewModel
     private val mAdapter: AllAdapter = AllAdapter(this)
     private lateinit var mListener: MusicListener
+    lateinit var mAdView : AdView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
 
         mAllViewModel = ViewModelProvider(this).get(AllViewModel::class.java)
 
@@ -31,10 +36,14 @@ class AllFragment : Fragment() {
 
         val recycler = root.findViewById<RecyclerView>(R.id.recycler_all)
 
-
         recycler.layoutManager = LinearLayoutManager(context)
 
        recycler.adapter = mAdapter
+
+        MobileAds.initialize(context) {}
+        mAdView = root.findViewById(R.id.adView3)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         mListener = object : MusicListener {
             override fun onClick(titulo: String, banda: String, foto: String) { }

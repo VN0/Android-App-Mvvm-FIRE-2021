@@ -67,10 +67,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:paddingRight="60dp"
+                android:paddingRight="80dp"
                 android:text="Titulo"
                 android:textColor="@color/white"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 app:layout_constraintLeft_toRightOf="@id/cifra_foto"
                 app:layout_constraintTop_toTopOf="@id/cifra_foto" />
 
@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:paddingRight="60dp"
+                android:paddingRight="80dp"
                 android:text="Banda"
                 android:textColor="@color/fluorescent_orange"
                 android:textSize="15sp"

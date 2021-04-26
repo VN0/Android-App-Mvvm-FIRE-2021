@@ -21,8 +21,7 @@
     <string name="sim">Sí</string>
     <string name="deseja_remover">Estás seguro de que desea eliminar?</string>
     <string name="remover_da_lista">Quitar de la lista</string>
-    <string name="ex_1">Diante do Trono </string>
-    <string name="ex_2">A alegria do Senhor </string>
     <string name="adicionar_lista">Agregar a la lista</string>
+    <string name="letrasmaiusculas">Respeta los acentos, si los hay</string>
     <string name="a_lista_est_vazia">La lista está vacía</string>
 </resources>

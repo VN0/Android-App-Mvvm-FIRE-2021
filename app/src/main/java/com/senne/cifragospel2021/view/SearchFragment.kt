@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.*
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
@@ -47,25 +49,6 @@ class SearchFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = mAdapter
 
-        // SPAN band_title
-        val fColorWhite = ForegroundColorSpan(resources.getColor(R.color.white))
-        val flag = Spannable.SPAN_INCLUSIVE_EXCLUSIVE
-
-        val ex1 = SpannableStringBuilder(getString(R.string.ex_1))
-        ex1.setSpan( fColorWhite,0 , 7, flag )
-        root.example1.text = ex1
-
-        val ex2 = SpannableStringBuilder(getString(R.string.ex_1))
-        ex2.setSpan( fColorWhite,10 , 14, flag )
-        root.example2.text = ex2
-
-        val ex3 = SpannableStringBuilder(getString(R.string.ex_2))
-        ex3.setSpan( fColorWhite,1 , 8, flag )
-        root.example3.text = ex3
-
-        val ex4 = SpannableStringBuilder(getString(R.string.ex_2))
-        ex4.setSpan( fColorWhite,13 , 19, flag )
-        root.example4.text = ex4
 
 
         val editText: EditText = root.findViewById(R.id.edit_text)
@@ -85,7 +68,9 @@ class SearchFragment : Fragment() {
                     mSearchViewModel.load("$s".toLowerCase()).observe(viewLifecycleOwner, Observer {
                         search_progress.visibility = View.GONE
                         if(!it.isEmpty()) {
-                            closeKeyboard(root.rootView.findViewById(R.id.edit_text))
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                closeKeyboard(root.rootView.findViewById(R.id.edit_text))
+                            }, 800)
                             search_results.visibility = View.GONE
                         }else {
                             search_results.visibility = View.VISIBLE

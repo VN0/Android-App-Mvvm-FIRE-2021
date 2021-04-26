@@ -45,41 +45,14 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val db = FirebaseFirestore.getInstance()
-
-
+       // val db = FirebaseFirestore.getInstance()
 
 
 
 
     }
 
-    private fun generateSimple(txt: String, keywords: MutableList<String>) {
 
-        var inputString = txt
-        val words = inputString.split(" ")
-        for(word in words) {
-            var appendString = ""
-            for(charPosition in inputString.indices) {
-                appendString += inputString[charPosition].toString().replace("á","a").replace("ã","a")
-                    .replace("â","a").replace("é","e").replace("ê","e")
-                    .replace("í","i").replace("ó","o").replace("ô","o").replace("ú","u")
-                if(appendString.length > 1) {
-                    keywords.add(appendString.toLowerCase())
-                }
-
-            }
-            inputString = inputString.replace("$word ", "")
-        }
-    }
-    private fun generateSearchKeyWords(inputText: String,inputText2: String): List<String> {
-
-        var keyWords = mutableListOf<String>()
-        generateSimple(inputText, keyWords)
-        generateSimple(inputText2, keyWords)
-
-        return keyWords
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)

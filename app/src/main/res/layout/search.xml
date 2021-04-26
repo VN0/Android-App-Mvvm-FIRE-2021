@@ -113,75 +113,18 @@
            android:textColor="@color/gray"/>
 
        <TextView
-           android:id="@+id/exemplo"
+           android:id="@+id/symbles"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_marginTop="12dp"
-           android:textSize="20sp"
+           android:layout_marginTop="16dp"
+           android:text="@string/letrasmaiusculas"
+           android:textSize="16sp"
            app:layout_constraintLeft_toLeftOf="parent"
            app:layout_constraintRight_toRightOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/band_title"
-           android:text="@string/exemplo"
+           app:layout_constraintTop_toBottomOf="@+id/band_title"
            android:layout_gravity="center"
-           android:textColor="@color/yellow"/>
-
-       <TextView
-           android:id="@+id/example1"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="6dp"
-           android:textAlignment="center"
-           android:text="@string/ex_1"
-           android:textSize="14sp"
-           android:paddingHorizontal="16dp"
-           android:layout_gravity="center"
-           app:layout_constraintLeft_toLeftOf="parent"
-           app:layout_constraintRight_toRightOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/exemplo"
            android:textColor="@color/gray"/>
 
-       <TextView
-           android:id="@+id/example2"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="6dp"
-           android:textAlignment="center"
-           android:text="@string/ex_1"
-           app:layout_constraintLeft_toLeftOf="parent"
-           app:layout_constraintRight_toRightOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/example1"
-           android:textSize="14sp"
-           android:paddingHorizontal="16dp"
-           android:layout_gravity="center"
-           android:textColor="@color/gray"/>
-       <TextView
-           android:id="@+id/example3"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="6dp"
-           android:textAlignment="center"
-           android:text="@string/ex_2"
-           app:layout_constraintLeft_toLeftOf="parent"
-           app:layout_constraintRight_toRightOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/example2"
-           android:textSize="14sp"
-           android:paddingHorizontal="16dp"
-           android:layout_gravity="center"
-           android:textColor="@color/gray"/>
-       <TextView
-           android:id="@+id/example4"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="6dp"
-           android:textAlignment="center"
-           android:text="@string/ex_2"
-           app:layout_constraintLeft_toLeftOf="parent"
-           app:layout_constraintRight_toRightOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/example3"
-           android:textSize="14sp"
-           android:paddingHorizontal="16dp"
-           android:layout_gravity="center"
-           android:textColor="@color/gray"/>
    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -1,3 +1,4 @@
+![readmeHead](https://user-images.githubusercontent.com/62426822/120315179-f76dfa80-c2d3-11eb-8e3e-c30a28bca33c.jpg)
 
 <h3>App criado para ajudar a comunidade de músicos. Mais de 200 mil músicas cifradas.</h3>
 

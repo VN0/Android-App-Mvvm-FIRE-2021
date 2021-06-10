@@ -24,4 +24,9 @@
     <string name="letrasmaiusculas">Respect the accents, if any</string>
     <string name="adicionar_lista">Add to List</string>
     <string name="a_lista_est_vazia">The list is empty</string>
+
+    <!-- TEST ca-app-pub-3940256099942544/6300978111
+   MY ACCOUNT ca-app-pub-7042395532979448/2694596237 -->
+    <string name="id_admob">ca-app-pub-3940256099942544/6300978111</string>
+
 </resources>

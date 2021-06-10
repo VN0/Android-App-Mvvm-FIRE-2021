@@ -19,7 +19,7 @@ class SearchViewModel : ViewModel() {
         val mutableData = MutableLiveData<MutableList<SearchModel>>()
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
-            delay(300)
+            delay(600)
             FirebaseFirestore.getInstance().collection("New Search").orderBy("key_words").startAt(searchText).endAt(searchText + "\uf8ff").limit(10)
                .get()
                 .addOnSuccessListener { result ->

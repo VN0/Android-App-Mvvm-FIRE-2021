@@ -26,9 +26,10 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.CifraGospel2021.NoActionBar"/>
 
+        <!--  TEST ca-app-pub-3940256099942544~3347511713
+              MY ACCOUNT ca-app-pub-7042395532979448~9214158150  -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-
             android:value="ca-app-pub-3940256099942544~3347511713"/>
 
     </application>

@@ -45,11 +45,6 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-       // val db = FirebaseFirestore.getInstance()
-
-
-
-
     }
 
 

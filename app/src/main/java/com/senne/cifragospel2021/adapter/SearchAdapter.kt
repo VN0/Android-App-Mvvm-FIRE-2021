@@ -16,16 +16,21 @@ class SearchAdapter(var searchList: List<SearchModel>) : RecyclerView.Adapter<Se
 
     inner class SearchListViewHolder(itemView: View, private val listener: MusicListener): RecyclerView.ViewHolder(itemView) {
         fun bind(searchModel: SearchModel) {
-
             itemView.search_titlle.text = searchModel.titulo
             itemView.search_band.text = searchModel.banda
+            if(searchModel.titulo != "") {
+
+                itemView.search_titlle.setOnClickListener {
+                    listener.onClick(searchModel.titulo, searchModel.banda, searchModel.foto)
+                }
+            }
+
             if(searchModel.foto == "https://studiosol-a.akamaihd.net/cc/img/desktop/thumb-art.svg?v=3") {
                 searchModel.foto = "https://icon-library.com/images/music-icon/music-icon-2.jpg"
             }
             Picasso.get().load(searchModel.foto).into(itemView.search_foto)
-            itemView.search_titlle.setOnClickListener {
-                listener.onClick(searchModel.titulo, searchModel.banda, searchModel.foto)
-            }
+
+
 
             itemView.search_band.setOnClickListener {
             listener.onClickAll(searchModel.banda, searchModel.foto)

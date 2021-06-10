@@ -24,4 +24,8 @@
     <string name="adicionar_lista">Agregar a la lista</string>
     <string name="letrasmaiusculas">Respeta los acentos, si los hay</string>
     <string name="a_lista_est_vazia">La lista está vacía</string>
+    <!-- TEST ca-app-pub-3940256099942544/6300978111
+       MY ACCOUNT ca-app-pub-7042395532979448/2694596237 -->
+    <string name="id_admob">ca-app-pub-3940256099942544/6300978111</string>
+
 </resources>

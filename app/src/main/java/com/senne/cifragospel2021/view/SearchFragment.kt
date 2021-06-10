@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.*
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.senne.cifragospel2021.R
 import com.senne.cifragospel2021.adapter.SearchAdapter
 import com.senne.cifragospel2021.listener.MusicListener
@@ -68,9 +72,6 @@ class SearchFragment : Fragment() {
                     mSearchViewModel.load("$s".toLowerCase()).observe(viewLifecycleOwner, Observer {
                         search_progress.visibility = View.GONE
                         if(!it.isEmpty()) {
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                closeKeyboard(root.rootView.findViewById(R.id.edit_text))
-                            }, 800)
                             search_results.visibility = View.GONE
                         }else {
                             search_results.visibility = View.VISIBLE

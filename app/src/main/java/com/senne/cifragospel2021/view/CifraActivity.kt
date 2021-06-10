@@ -7,6 +7,7 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.AdapterView
@@ -15,14 +16,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.senne.cifragospel2021.R
 import com.senne.cifragospel2021.sharedPreferences.SecurityPreferences
 import com.senne.cifragospel2021.viewModel.CifraViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cifra.*
+import java.lang.System.load
+import java.util.ServiceLoader.load
 import kotlin.properties.Delegates
 
 
@@ -51,6 +54,7 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
         cifra_btn.setOnClickListener(this)
         cifra_banda.setOnClickListener(this)
         back.setOnClickListener(this)
+
 
         mCifraViewModel = ViewModelProvider(this).get(CifraViewModel::class.java)
 

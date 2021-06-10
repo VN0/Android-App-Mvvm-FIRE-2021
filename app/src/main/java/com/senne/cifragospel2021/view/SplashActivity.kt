@@ -22,8 +22,6 @@ class SplashActivity : AppCompatActivity() {
 
         if (supportActionBar != null) supportActionBar!!.hide()
 
-
-
         val animations = AnimationUtils.loadAnimation(this, R.anim.bottom_anim)
         splash_progress.startAnimation(animations)
 

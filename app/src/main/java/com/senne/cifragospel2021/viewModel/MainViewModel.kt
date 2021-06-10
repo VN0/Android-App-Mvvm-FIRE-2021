@@ -1,5 +1,6 @@
 package com.senne.cifragospel2021.viewModel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.senne.cifragospel2021.model.AllModel
@@ -8,23 +9,24 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: CifraRepository) : ViewModel() {
 
-    private val mAllCifras = MutableLiveData<MutableList<AllModel>>()
-    var allCifras: LiveData<MutableList<AllModel>> = mAllCifras
-
-
     fun loadAll() {
 
-        FirebaseFirestore.getInstance().collection("Bandas").orderBy("banda").get()
-            .addOnSuccessListener { result ->
+     viewModelScope.launch {
+          if(repository.getAll().isEmpty()) {
+              FirebaseFirestore.getInstance().collection("Bandas").orderBy("banda").get()
+                  .addOnSuccessListener { result ->
 
-                for (document in result) {
-                    val cifra = document.toObject(AllModel::class.java)
-                    viewModelScope.launch {
-                        repository.createCifra(AllModel("${cifra.banda}", "${cifra.foto}"))
-                    }
-                }
+                      for (document in result) {
+                          val cifra = document.toObject(AllModel::class.java)
+                          viewModelScope.launch {
+                              repository.createCifra(AllModel("${cifra.banda}", "${cifra.foto}"))
+                          }
+                      }
 
-            }
+                  }
+          }
+        }
+
     }
 
     class RegistrationViewModelFactory(private val repository: CifraRepository) :

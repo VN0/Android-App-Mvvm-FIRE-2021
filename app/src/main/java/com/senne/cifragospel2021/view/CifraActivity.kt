@@ -10,6 +10,7 @@ import android.text.style.StyleSpan
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -54,6 +55,9 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnI
         cifra_btn.setOnClickListener(this)
         cifra_banda.setOnClickListener(this)
         back.setOnClickListener(this)
+
+        val top_anim = AnimationUtils.loadAnimation(this, R.anim.top_anim)
+        cifra_btn.startAnimation(top_anim)
 
 
         mCifraViewModel = ViewModelProvider(this).get(CifraViewModel::class.java)

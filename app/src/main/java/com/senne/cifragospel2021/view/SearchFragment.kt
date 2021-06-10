@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.core.content.ContextCompat.getSystemService
@@ -29,8 +30,10 @@ import com.senne.cifragospel2021.adapter.SearchAdapter
 import com.senne.cifragospel2021.listener.MusicListener
 import com.senne.cifragospel2021.model.SearchModel
 import com.senne.cifragospel2021.viewModel.SearchViewModel
+import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.search.*
 import kotlinx.android.synthetic.main.search.view.*
+import kotlinx.android.synthetic.main.search_item_row.*
 
 class SearchFragment : Fragment() {
 
@@ -48,12 +51,13 @@ class SearchFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.search, container, false)
 
+
         var recycler: RecyclerView = root.findViewById(R.id.recycler_search)
         recycler.hasFixedSize()
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = mAdapter
 
-
+        animationsStart(root)
 
         val editText: EditText = root.findViewById(R.id.edit_text)
         editText.setOnFocusChangeListener { view, b ->
@@ -115,6 +119,20 @@ class SearchFragment : Fragment() {
         mAdapter.attachListener(mListener)
 
         return root
+    }
+
+    private fun animationsStart(root: View) {
+        val top_anim = AnimationUtils.loadAnimation(context, R.anim.top_anim)
+        root.foto_tip.startAnimation(top_anim)
+
+        val bootom_anim = AnimationUtils.loadAnimation(context, R.anim.bottom_anim)
+        root.dica.startAnimation(bootom_anim)
+
+        val left_anim = AnimationUtils.loadAnimation(context, R.anim.left_anim)
+        root.band_title.startAnimation(left_anim)
+
+        val right_anim = AnimationUtils.loadAnimation(context, R.anim.right_anim)
+        root.symbles.startAnimation(right_anim)
     }
 
     private fun closeKeyboard(view: View) {

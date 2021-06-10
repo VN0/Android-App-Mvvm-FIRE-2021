@@ -20,7 +20,7 @@ class SearchViewModel : ViewModel() {
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
             delay(600)
-            FirebaseFirestore.getInstance().collection("New Search").orderBy("key_words").startAt(searchText).endAt(searchText + "\uf8ff").limit(10)
+            FirebaseFirestore.getInstance().collection("New Search").orderBy("key_words").startAt(searchText).endAt(searchText + "\uf8ff").limit(25)
                .get()
                 .addOnSuccessListener { result ->
                     val list = mutableListOf<SearchModel>()

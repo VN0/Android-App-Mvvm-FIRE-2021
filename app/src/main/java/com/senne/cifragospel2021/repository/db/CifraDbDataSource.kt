@@ -12,7 +12,7 @@ class CifraDbDataSource(
     }
 
     override suspend fun getAll(): MutableList<AllModel> {
-        return cifraDAO.getCifra()
+        return cifraDAO.getAllCifra()
     }
 
 }

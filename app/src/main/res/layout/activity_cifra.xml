@@ -6,109 +6,128 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="1dp"
     tools:context=".view.CifraActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        ads:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <View
-                android:id="@+id/view"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_height="wrap_content">
 
+                <include layout="@layout/include_tool_bar" />
+
+                <Button
+                    android:id="@+id/cifra_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="4dp"
+                    android:backgroundTint="@color/dark_orange"
+                    android:text="@string/adicionar_lista"
+                    android:textSize="10sp"
+                    ads:layout_constraintBottom_toBottomOf="@+id/toolbar_main"
+                    ads:layout_constraintRight_toRightOf="parent"
+                    ads:layout_constraintTop_toTopOf="@+id/toolbar_main" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/dark_blue"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:padding="8dp">
 
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                <ImageView
+                    android:id="@+id/cifra_foto"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="#eee"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                android:layout_marginTop="16dp"
-                android:src="@drawable/back"
-                app:layout_constraintLeft_toLeftOf="@id/view"
-                app:layout_constraintTop_toTopOf="@id/view"
-                app:tint="@color/white" />
+                <TextView
+                    android:id="@+id/cifra_titulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:paddingRight="80dp"
+                    android:text="Titulo"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintLeft_toRightOf="@id/cifra_foto"
+                    app:layout_constraintTop_toTopOf="@id/cifra_foto" />
 
-            <Button
-                android:id="@+id/cifra_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="4dp"
-                android:backgroundTint="@color/dark_orange"
-                android:text="@string/adicionar_lista"
-                android:textSize="10sp"
-                app:layout_constraintRight_toRightOf="@+id/view"
-                app:layout_constraintTop_toTopOf="@id/view" />
+                <TextView
+                    android:id="@+id/cifra_banda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:paddingRight="80dp"
+                    android:text="Banda"
+                    android:textColor="@color/fluorescent_orange"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toRightOf="@id/cifra_foto"
+                    app:layout_constraintTop_toBottomOf="@id/cifra_titulo" />
 
-            <ImageView
-                android:id="@+id/cifra_foto"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="64dp"
-                android:background="#eee"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/text_tom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="Tom: "
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/cifra_tom"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cifra_tom" />
 
-            <TextView
-                android:id="@+id/cifra_titulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:paddingRight="80dp"
-                android:text="Titulo"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintLeft_toRightOf="@id/cifra_foto"
-                app:layout_constraintTop_toTopOf="@id/cifra_foto" />
+                <Spinner
+                    android:id="@+id/cifra_tom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/text_tom"
+                    app:layout_constraintTop_toBottomOf="@id/cifra_banda" />
 
-            <TextView
-                android:id="@+id/cifra_banda"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:paddingRight="80dp"
-                android:text="Banda"
-                android:textColor="@color/fluorescent_orange"
-                android:textSize="15sp"
-                app:layout_constraintLeft_toRightOf="@id/cifra_foto"
-                app:layout_constraintTop_toBottomOf="@id/cifra_titulo" />
+                <ImageView
+                    android:id="@+id/cifra_less"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-            <TextView
-                android:id="@+id/text_tom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="Tom: "
-                android:textColor="@color/gray"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@id/cifra_tom"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@id/cifra_tom" />
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/menos"
+                    app:layout_constraintBottom_toBottomOf="@id/cifra_tom"
+                    app:layout_constraintLeft_toLeftOf="@id/cifra_more"
+                    app:layout_constraintRight_toLeftOf="@id/cifra_more"
+                    app:layout_constraintTop_toTopOf="@id/cifra_tom"
+                    app:tint="@color/yellow" />
 
-            <Spinner
-                android:id="@+id/cifra_tom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="@id/view"
-                app:layout_constraintLeft_toRightOf="@id/text_tom"
-                app:layout_constraintTop_toBottomOf="@id/cifra_banda" />
+                <ImageView
+                    android:id="@+id/cifra_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
 
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/mais"
+                    app:layout_constraintBottom_toBottomOf="@id/cifra_tom"
+                    app:layout_constraintLeft_toRightOf="@id/cifra_less"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cifra_tom"
+                    app:tint="@color/yellow" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/cifra_cifra"
@@ -116,61 +135,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:textSize="14sp"
                 android:paddingBottom="100dp"
-                app:layout_constraintLeft_toLeftOf="@id/view"
-                app:layout_constraintTop_toBottomOf="@id/view" />
+                android:textSize="14sp" />
 
-            <ProgressBar
-                android:id="@+id/cifra_progress"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
-                android:indeterminateDrawable="@drawable/cpb"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view" />
-
-            <ImageView
-                android:id="@+id/cifra_less"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginRight="8dp"
-                android:src="@drawable/menos"
-                app:layout_constraintBottom_toBottomOf="@id/cifra_tom"
-                app:layout_constraintLeft_toLeftOf="@id/cifra_more"
-                app:layout_constraintRight_toLeftOf="@id/cifra_more"
-                app:layout_constraintTop_toTopOf="@id/cifra_tom"
-                app:tint="@color/yellow" />
-
-            <ImageView
-                android:id="@+id/cifra_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-
-                android:layout_marginRight="12dp"
-                android:src="@drawable/mais"
-                app:layout_constraintBottom_toBottomOf="@id/cifra_tom"
-                app:layout_constraintLeft_toRightOf="@id/cifra_less"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/cifra_tom"
-                app:tint="@color/yellow" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
-        ads:adSize="SMART_BANNER"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
         ads:adUnitId="@string/id_admob"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"></com.google.android.gms.ads.AdView>
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintLeft_toLeftOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/cifra_progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/cpb"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintLeft_toLeftOf="parent"
+        ads:layout_constraintRight_toRightOf="parent"
+        ads:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,38 +4,29 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#37F02900"
     android:layout_height="match_parent"
     tools:context=".view.MusicsAcitivity">
+
+    <include layout="@layout/include_tool_bar" />
 
     <View
         android:id="@+id/musics_bar"
         android:layout_width="match_parent"
-        android:layout_height="136dp"
+        android:layout_height="80dp"
         android:background="@color/dark_blue"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_main" />
 
-    <ImageView
-        android:id="@+id/musics_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="8dp"
-
-        android:src="@drawable/back"
-        app:layout_constraintLeft_toLeftOf="@id/musics_bar"
-        app:layout_constraintTop_toTopOf="@id/musics_bar"
-        app:tint="@color/white"/>
 
     <ImageView
         android:id="@+id/musics_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="#eee"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/musics_bar"
+        app:layout_constraintTop_toTopOf="@id/musics_bar"
         app:layout_constraintBottom_toBottomOf="@id/musics_bar"/>
 
     <LinearLayout
@@ -52,26 +43,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:fontFamily="cursive"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.15"
             android:lineSpacingExtra="8sp"
             android:paddingLeft="20dp"
             android:paddingRight="10dp"
             android:text="Titulo"
-            android:letterSpacing="0.15"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_musics"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="138dp"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/musics_bar"
         app:layout_constraintRight_toRightOf="parent"
+        tools:listitem="@layout/musics_item_row"
         android:paddingBottom="40dp"/>
 
     <ProgressBar

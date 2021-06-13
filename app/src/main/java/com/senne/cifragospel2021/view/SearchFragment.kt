@@ -35,36 +35,29 @@ import kotlinx.android.synthetic.main.search.*
 import kotlinx.android.synthetic.main.search.view.*
 import kotlinx.android.synthetic.main.search_item_row.*
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(R.layout.search) {
 
     private lateinit var mSearchViewModel: SearchViewModel
     private var searchList: List<SearchModel> = ArrayList()
     private val mAdapter = SearchAdapter(searchList)
     private lateinit var mListener: MusicListener
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         mSearchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
 
-        val root = inflater.inflate(R.layout.search, container, false)
+        recycler_search.hasFixedSize()
+        recycler_search.layoutManager = LinearLayoutManager(context)
+        recycler_search.adapter = mAdapter
 
+        animationsStart()
 
-        var recycler: RecyclerView = root.findViewById(R.id.recycler_search)
-        recycler.hasFixedSize()
-        recycler.layoutManager = LinearLayoutManager(context)
-        recycler.adapter = mAdapter
-
-        animationsStart(root)
-
-        val editText: EditText = root.findViewById(R.id.edit_text)
-        editText.setOnFocusChangeListener { view, b ->
+        edit_text.setOnFocusChangeListener { view, b ->
             if(!b)  closeKeyboard(view)
         }
 
-        editText.addTextChangedListener(object : TextWatcher {
+        edit_text.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -107,8 +100,8 @@ class SearchFragment : Fragment() {
             override fun onClickAll(banda: String, foto: String) {
                 val intent = Intent(context,MusicsAcitivity::class.java)
                 val bundle = Bundle()
-                    bundle.putString("banda", banda)
-                    bundle.putString("foto", foto)
+                bundle.putString("banda", banda)
+                bundle.putString("foto", foto)
 
                 intent.putExtras(bundle)
                 startActivity(intent)
@@ -117,22 +110,20 @@ class SearchFragment : Fragment() {
 
         }
         mAdapter.attachListener(mListener)
-
-        return root
     }
 
-    private fun animationsStart(root: View) {
+    private fun animationsStart() {
         val top_anim = AnimationUtils.loadAnimation(context, R.anim.top_anim)
-        root.foto_tip.startAnimation(top_anim)
+        foto_tip.startAnimation(top_anim)
 
         val bootom_anim = AnimationUtils.loadAnimation(context, R.anim.bottom_anim)
-        root.dica.startAnimation(bootom_anim)
+        dica.startAnimation(bootom_anim)
 
         val left_anim = AnimationUtils.loadAnimation(context, R.anim.left_anim)
-        root.band_title.startAnimation(left_anim)
+        band_title.startAnimation(left_anim)
 
         val right_anim = AnimationUtils.loadAnimation(context, R.anim.right_anim)
-        root.symbles.startAnimation(right_anim)
+        symbles.startAnimation(right_anim)
     }
 
     private fun closeKeyboard(view: View) {

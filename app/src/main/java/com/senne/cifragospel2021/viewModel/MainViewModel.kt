@@ -1,6 +1,5 @@
 package com.senne.cifragospel2021.viewModel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.senne.cifragospel2021.model.AllModel
@@ -11,20 +10,20 @@ class MainViewModel(private val repository: CifraRepository) : ViewModel() {
 
     fun loadAll() {
 
-     viewModelScope.launch {
-          if(repository.getAll().isEmpty()) {
-              FirebaseFirestore.getInstance().collection("Bandas").orderBy("banda").get()
-                  .addOnSuccessListener { result ->
+        viewModelScope.launch {
+            if (repository.getAll().isEmpty()) {
+                FirebaseFirestore.getInstance().collection("Bandas").orderBy("banda").get()
+                    .addOnSuccessListener { result ->
 
-                      for (document in result) {
-                          val cifra = document.toObject(AllModel::class.java)
-                          viewModelScope.launch {
-                              repository.createCifra(AllModel("${cifra.banda}", "${cifra.foto}"))
-                          }
-                      }
+                        for (document in result) {
+                            val cifra = document.toObject(AllModel::class.java)
+                            viewModelScope.launch {
+                                repository.createCifra(AllModel("${cifra.banda}", "${cifra.foto}"))
+                            }
+                        }
 
-                  }
-          }
+                    }
+            }
         }
 
     }

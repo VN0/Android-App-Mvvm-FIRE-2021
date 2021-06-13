@@ -53,7 +53,7 @@ class MyListFragment : Fragment() {
         var key = securityPreferences.getString("email")
 
         mMyListViewModel.load("$key").observe(viewLifecycleOwner, Observer {
-            if(!it.isEmpty()) {
+            if(it.isNotEmpty()) {
                 myList_empty.visibility = View.GONE
             }else {
                 myList_empty.visibility = View.VISIBLE

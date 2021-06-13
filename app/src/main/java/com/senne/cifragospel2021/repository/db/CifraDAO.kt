@@ -13,5 +13,7 @@ interface CifraDAO {
     suspend fun save(cifra: AllModelEntity)
 
     @Query("SELECT * FROM cifra")
-    suspend fun getCifra(): MutableList<AllModel>
+    suspend fun getAllCifra(): MutableList<AllModel>
+
+
 }

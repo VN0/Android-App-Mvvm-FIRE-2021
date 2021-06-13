@@ -3,12 +3,15 @@ package com.senne.cifragospel2021.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.senne.cifragospel2021.cifras.*
 import com.senne.cifragospel2021.model.CifraModel
-import kotlin.random.Random
+import com.senne.cifragospel2021.repository.db.CifraDbDataSource
+import com.senne.cifragospel2021.repository.db.CifraRepository
+import com.senne.cifragospel2021.repositoryList.ListRepository
 
-class CifraViewModel : ViewModel() {
+class CifraViewModel(private val repository: CifraRepository) : ViewModel() {
 
     private lateinit var photoBanda: String
 
@@ -285,5 +288,13 @@ class CifraViewModel : ViewModel() {
             else if (tomSpin == "A#" || tomSpin == "Bb" || tomSpin == "Gm") { mNovoTom.value = " ${mSiCifra.silas(cifraTratada)}" }
             else if (tomSpin == "B" || tomSpin == "G#m" || tomSpin == "Abm") { mNovoTom.value = mCifra.value }
         }
+    }
+
+    class RegistrationViewModelFactory(private val repository: CifraDbDataSource) :
+        ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return CifraViewModel(repository) as T
+        }
+
     }
 }

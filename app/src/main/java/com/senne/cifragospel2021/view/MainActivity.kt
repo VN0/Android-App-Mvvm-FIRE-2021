@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
-        drawerLayout.setDrawerListener(this)
+        drawerLayout.addDrawerListener(this)
 
         viewModel.loadAll()
 
@@ -56,19 +56,16 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
                 R.id.nav_search, R.id.nav_all, R.id.nav_myList), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
     }
-
-
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun onDrawerStateChanged(newState: Int) { }
-    override fun onDrawerClosed(drawerView: View) { }
-    override fun onDrawerOpened(drawerView: View) { }
+    override fun onDrawerStateChanged(newState: Int) {}
+    override fun onDrawerClosed(drawerView: View) {}
+    override fun onDrawerOpened(drawerView: View) {}
 
     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
         closeKeyboard(drawerView)
@@ -77,13 +74,5 @@ class MainActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
     private fun closeKeyboard(view: View) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
-    }
-
-    private fun loading(result: QuerySnapshot) {
-        val list = mutableListOf<AllModel>()
-        for(document in result) {
-            val cifra = document.toObject(AllModel::class.java)
-            list.add( AllModel("${cifra.banda}","${cifra.foto}") )
-        }
     }
 }

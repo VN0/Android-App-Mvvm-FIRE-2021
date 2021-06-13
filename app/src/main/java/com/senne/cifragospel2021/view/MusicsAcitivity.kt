@@ -2,6 +2,7 @@ package com.senne.cifragospel2021.view
 
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import com.senne.cifragospel2021.model.MusicsModel
 import com.senne.cifragospel2021.viewModel.MusicsViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_musics.*
+import kotlinx.android.synthetic.main.include_tool_bar.*
 
 
 class MusicsAcitivity : AppCompatActivity() {
@@ -33,17 +35,21 @@ class MusicsAcitivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_musics)
 
-        if(supportActionBar != null) supportActionBar!!.hide()
+        //Toolbar
+        setSupportActionBar(toolbar_main)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar_main.setNavigationIconTint(Color.WHITE)
 
-        musics_back.setOnClickListener {
-            finish()
-        }
+
+        //ADS
         MobileAds.initialize(this) {}
         mAdView = findViewById(R.id.adView4)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
         mMusicsViewModel = ViewModelProvider(this).get(MusicsViewModel::class.java)
 
+        //REcyclerView
         var recycler : RecyclerView = findViewById(R.id.recycler_musics)
         recycler.hasFixedSize()
         recycler.layoutManager = LinearLayoutManager(this)
@@ -80,6 +86,11 @@ class MusicsAcitivity : AppCompatActivity() {
 
         }
         mAdapter.attachListener(mListener)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 
 

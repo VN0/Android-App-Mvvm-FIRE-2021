@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical"
+        android:background="#19282634"
         android:padding="20dp">
 
         <TextView

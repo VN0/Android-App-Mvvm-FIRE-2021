@@ -115,15 +115,6 @@ class SearchFragment : Fragment(R.layout.search) {
     private fun animationsStart() {
         val top_anim = AnimationUtils.loadAnimation(context, R.anim.top_anim)
         foto_tip.startAnimation(top_anim)
-
-        val bootom_anim = AnimationUtils.loadAnimation(context, R.anim.bottom_anim)
-        dica.startAnimation(bootom_anim)
-
-        val left_anim = AnimationUtils.loadAnimation(context, R.anim.left_anim)
-        band_title.startAnimation(left_anim)
-
-        val right_anim = AnimationUtils.loadAnimation(context, R.anim.right_anim)
-        symbles.startAnimation(right_anim)
     }
 
     private fun closeKeyboard(view: View) {

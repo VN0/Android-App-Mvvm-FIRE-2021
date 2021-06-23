@@ -8,4 +8,5 @@ interface CifraRepository {
 
     suspend fun getAll(): MutableList<AllModel>
 
+
 }

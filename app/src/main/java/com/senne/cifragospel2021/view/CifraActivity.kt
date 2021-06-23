@@ -58,6 +58,7 @@ class CifraActivity : AppCompatActivity(), View.OnClickListener,
             )
         ).get(CifraViewModel::class.java)
 
+        //Admob
         MobileAds.initialize(this) {}
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()

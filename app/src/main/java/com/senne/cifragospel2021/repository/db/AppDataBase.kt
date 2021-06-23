@@ -6,9 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [AllModelEntity::class], version = 1)
-abstract class AppDataBase: RoomDatabase() {
+abstract class AppDataBase : RoomDatabase() {
 
-     abstract fun cifraDAO(): CifraDAO
+    abstract fun cifraDAO(): CifraDAO
 
     companion object {
         @Volatile
@@ -24,7 +24,6 @@ abstract class AppDataBase: RoomDatabase() {
                         "app_database"
                     ).build()
                 }
-
                 return instance
             }
         }

@@ -16,4 +16,3 @@
 ![toReadMe4](https://user-images.githubusercontent.com/62426822/120314747-79115880-c2d3-11eb-8833-612da8a9b1dd.jpg)
 ![toReadMe2](https://user-images.githubusercontent.com/62426822/120314753-79a9ef00-c2d3-11eb-9d97-30fb6a74bb52.jpg)
 
-<h3>🔗 <a href="https://play.google.com/store/apps/details?id=com.senne.cifragospel2021">Projeto na Google Play Store</a></h3>
